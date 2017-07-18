@@ -6,4 +6,6 @@ package com.example.plavatvornica.prvamalenaaplikacija.second_activity;
 
 public interface SecondInterface {
     void getNameOfPlayerOrTeam();
+
+
 }

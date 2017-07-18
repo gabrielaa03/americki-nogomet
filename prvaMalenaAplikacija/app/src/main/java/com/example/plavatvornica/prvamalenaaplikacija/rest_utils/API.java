@@ -25,8 +25,8 @@ public interface API {
     @GET("crime")
     Call<List<FeedCrime>> getCrime();
 
-    @GET("{human}")
-    Call<List<FeedCrime>> listRepos(@Query("user") String human);
+    @GET("player/topCrimes/{name}%20{lastname}")
+    Call<List<FeedCrime>> listOfCrimes(@Query("name") String name,@Query("lastname") String lastname);
 
 
 }
