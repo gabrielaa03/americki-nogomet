@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Najzločestiji"
+        />
+
+    <!--NAJZLOCESTIJI IGRAC-->
+
+    <TextView
+        android:id="@+id/tv_worst_palyer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Najzločestiji igrač: "
+        android:layout_below="@+id/button"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_worst_player_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:layout_toEndOf="@id/tv_worst_palyer_label"
+        tools:text="dfgdreghrt"
+        android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/bPlayer"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:padding="10dp"
+        android:background="@drawable/policeman"
+        android:layout_above="@+id/tv_worst_team_value"
+        android:layout_alignParentRight="true"
+        ></Button>
+
+    <!--NAJZLOČESTIJI TIM-->
+
+
+
+    <TextView
+        android:id="@+id/tv_worst_team_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_worst_palyer_label"
+        android:text="Tim s najviše zločestih: "
+        android:padding="10dp"
+
+        />
+    <TextView
+        android:id="@+id/tv_worst_team_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_worst_player_value"
+        android:layout_toEndOf="@+id/tv_worst_team_label"
+        tools:text="dfgdreghrt"
+        android:padding="10dp"
+        />
+
+
+
+
+        <!--NAJGORI ZLOČIN-->
+
+
+    <TextView
+        android:id="@+id/tv_worst_crime_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_worst_team_label"
+        android:text="Najčešći zločin: "
+        android:padding="10dp"
+
+        />
+
+
+    <TextView
+        android:id="@+id/tv_worst_crime_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_worst_team_value"
+        android:layout_toEndOf="@+id/tv_worst_crime_label"
+        tools:text="dfgdreghrt"
+        android:padding="10dp"
+        />
+
+    <Button
+        android:id="@+id/bCrime"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_worst_team_value"
+        android:padding="10dp"
+        android:background="@drawable/images"
+        ></Button>
+
+
+</RelativeLayout>
