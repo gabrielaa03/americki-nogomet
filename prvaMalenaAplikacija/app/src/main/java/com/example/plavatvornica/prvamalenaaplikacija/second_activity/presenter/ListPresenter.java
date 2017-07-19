@@ -9,9 +9,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondInte
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,23 +36,30 @@ public class ListPresenter{
             public void onResponse(Call<List<FeedCrime>> call, Response<List<FeedCrime>> response) {
                 List<FeedCrime> list = response.body();
                 List<String> listOfAllCrimes = new ArrayList<String>();
-                listOfAllCrimes.add(" ");
                 for(int i = 0; i< list.size(); i++) {
                    listOfAllCrimes.add(list.get(i).getCategory());
                 }
                 Collections.sort(listOfAllCrimes);
                 List<String> list1 = new ArrayList<String>();
-
                 for(int i =0; i < listOfAllCrimes.size(); i++){
 
                         if(listOfAllCrimes.size()>(i+1) && listOfAllCrimes.get(i+1) != null) {
-                            if (listOfAllCrimes.get(i).substring(0, 1).equals(listOfAllCrimes.get(i + 1).substring(0, 1))) {
+                            if(i==0){
+                                list1.add(0, listOfAllCrimes.get(i).substring(0, 1));
+                                list1.add(listOfAllCrimes.get(i));
+                            }
+                            else if (listOfAllCrimes.get(i).substring(0, 1).equals(listOfAllCrimes.get(i + 1).substring(0, 1))) {
                                 list1.add(listOfAllCrimes.get(i));
                             }else{
-                                list1.add(i, listOfAllCrimes.get(i+1).substring(0, 1));
+                                list1.add(listOfAllCrimes.get(i));
+                                list1.add(listOfAllCrimes.get(i+1).substring(0, 1));
+
+
+
                             }
                         }
                 }
+                listener.sendOldList(listOfAllCrimes);
                 listener.sendSortedCrimes(list1);
             }
 

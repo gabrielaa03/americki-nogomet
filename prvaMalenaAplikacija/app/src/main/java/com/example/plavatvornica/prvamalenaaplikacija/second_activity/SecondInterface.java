@@ -13,5 +13,5 @@ public interface SecondInterface {
 
     void sendSortedCrimes(List<String> list);
 
-
+    void sendOldList(List<String> listOfAllCrimes);
 }

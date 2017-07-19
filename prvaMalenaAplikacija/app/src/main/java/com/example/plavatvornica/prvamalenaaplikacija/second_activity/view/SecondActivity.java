@@ -10,7 +10,6 @@ import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenter;
-import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import java.util.List;
 
@@ -72,6 +71,11 @@ public class SecondActivity extends AppCompatActivity implements SecondInterface
     @Override
     public void sendSortedCrimes(List<String> list) {
         recAdapter.setData(list);
+    }
+
+    @Override
+    public void sendOldList(List<String> list) {
+        recAdapter.oldOne(list);
     }
 
 
