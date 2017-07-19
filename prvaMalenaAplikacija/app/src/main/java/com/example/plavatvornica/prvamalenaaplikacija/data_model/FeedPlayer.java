@@ -12,59 +12,6 @@ import java.util.List;
 
 public class FeedPlayer {
 
-   /* private static final int sbfdfg = 2;
-
-    @SerializedName("Name")
-    @Expose
-    private String name;
-
-    @SerializedName("arrest_count")
-    @Expose
-    private String arrestCount;
-
-
-    @SerializedName("Category")
-    @Expose
-    private String category;
-
-    @SerializedName("Team_preffered_name")
-    @Expose
-    private String team;
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getTeam1() {
-        return team;
-    }
-
-    public void setTeam1(String team) {
-        this.team = team;
-    }
-
-    public String getNamePlayer() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getArrestCount() {
-        return arrestCount;
-    }
-
-    public void setArrestCount(String arrestCount) {
-        this.arrestCount = arrestCount;
-    }
-*/
-
-
     @SerializedName("Name")
     @Expose
     private String name;

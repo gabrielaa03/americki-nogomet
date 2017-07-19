@@ -88,9 +88,7 @@ public class HomePresenter {
                 int c;
                 List<FeedCrime> list = response.body();
                 String crime = "";
-                for (FeedCrime feedCrime : list) {
 
-                }
                 for (int i = 0; i < list.size(); i++) {
                     c = Integer.parseInt(list.get(i).getArrestCount());
                     if (c > count) {
@@ -126,7 +124,5 @@ public class HomePresenter {
     public void getNameTeam(final HomeInterface listener){
         listener.openSecondListActivity(team);
     }
-
-
 
 }

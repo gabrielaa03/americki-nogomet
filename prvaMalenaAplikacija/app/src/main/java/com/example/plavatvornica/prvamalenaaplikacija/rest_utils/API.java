@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -25,8 +26,8 @@ public interface API {
     @GET("crime")
     Call<List<FeedCrime>> getCrime();
 
-    @GET("player/topCrimes/{name}%20{lastname}")
-    Call<List<FeedCrime>> listOfCrimes(@Query("name") String name,@Query("lastname") String lastname);
+    @GET("player/topCrimes/{name}")
+    Call<List<FeedCrime>> listOfCrimes(@Path("name") String name);
 
 
 }
