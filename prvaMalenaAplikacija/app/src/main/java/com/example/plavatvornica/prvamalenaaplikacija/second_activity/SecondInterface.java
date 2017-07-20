@@ -1,5 +1,7 @@
 package com.example.plavatvornica.prvamalenaaplikacija.second_activity;
 
+import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
+
 import java.util.List;
 
 /**
@@ -9,9 +11,10 @@ import java.util.List;
 public interface SecondInterface {
     void getNameOfPlayerOrTeam();
 
-    void sendPlayersCrimes(List<String> list);
+    void sendPlayersCrimes(List<Wrapper> list);
 
-    void sendSortedCrimes(List<String> list);
+    void sendSortedCrimes(List<Wrapper> list);
 
-    void sendOldList(List<String> listOfAllCrimes);
+    void sendClick();
+
 }

@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,42 +23,45 @@ import butterknife.ButterKnife;
 
 
 
-public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
+public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TYPE_ELEMENT = 0;
     public static final int TYPE_HEADER = 1;
+    private String numberOfElements="";
 
-    ArrayList<String> recList = null;
-    ArrayList<String> oldList = null;
+    ArrayList<Wrapper> recList = null;
+    ItemClickListener clickListener;
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View viewONE = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_cell_layout, parent, false);
-        ViewHolder rowONE = new ViewHolder(viewONE);
-        return rowONE;
-/*
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_ELEMENT:
                 View viewONE = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_cell_layout, parent, false);
-                ViewHolder rowONE = new ViewHolder(viewONE);
+                ItemHolder rowONE = new ItemHolder(viewONE);
                 return rowONE;
 
             case TYPE_HEADER:
                 View viewTWO = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_cell_layout_header, parent, false);
-                ViewHolder rowTWO = new ViewHolder(viewTWO);
+                HeaderHolder rowTWO = new HeaderHolder(viewTWO);
                 return rowTWO;
 
-            default:
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_cell_layout, parent, false);
-            ViewHolder row = new ViewHolder(view);
-            return row;
-        }*/
+        }return null;
     }
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        String item = recList.get(position);
-        holder.cell.setText(item);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Wrapper item = recList.get(position);
 
+        switch(holder.getItemViewType()){
+            case TYPE_ELEMENT:
+                ItemHolder itemHolder = (ItemHolder) holder;
+                itemHolder.cell.setText(item.getText());
+                break;
+            case TYPE_HEADER:
+                HeaderHolder headerHolder = (HeaderHolder) holder;
+                headerHolder.cell1.setText(item.getText());
+                headerHolder.cellCount.setText(numberOfElements);
+                break;
+        }
     }
 
     @Override
@@ -63,38 +69,63 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.ViewHolder> {
         return (recList == null) ? 0 : recList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_recycler_cell)
-        TextView cell;
+    public class HeaderHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_recycler_cell1)TextView cell1;
+        @BindView(R.id.tv_recycler_cell_count)TextView cellCount;
 
-        public ViewHolder(View itemView) {
+
+        public HeaderHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
+    public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.tv_recycler_cell)
+        TextView cell;
+
+        public ItemHolder(final View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) clickListener.onClick(v, getAdapterPosition());
+        }
+    }
+
+
+    public interface ItemClickListener {
+        void onClick(View view, int position);
+    }
+
     @Override
     public int getItemViewType(int position) {
-        String pos = recList.get(position);
-        /*int viewType = 0;
+        Wrapper pos = recList.get(position);
+        int viewType = 0;
         if (pos.getType() == TYPE_ELEMENT) {
             viewType = TYPE_ELEMENT;
         } else if (pos.getType() == TYPE_HEADER) {
             viewType = TYPE_HEADER;
         }
 
-        return viewType;*/
-        return 1;
+        return viewType;
+
     }
 
-    public void setData(List<String> list){
+    public void setData(List<Wrapper> list){
         recList = new ArrayList<>();
         recList.addAll(list);
         notifyDataSetChanged();
     }
 
-    public void oldOne(List<String> list){
-        oldList = new ArrayList<>();
-        oldList.addAll(list);
-    }
+
 
 }

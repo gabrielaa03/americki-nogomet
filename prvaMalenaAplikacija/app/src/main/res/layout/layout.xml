@@ -102,5 +102,14 @@
         android:background="@drawable/images"
         ></Button>
 
+    <Button
+        android:id="@+id/btn_third_act"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="21dp"
+        android:text="ViewPager" />
+
 
 </RelativeLayout>

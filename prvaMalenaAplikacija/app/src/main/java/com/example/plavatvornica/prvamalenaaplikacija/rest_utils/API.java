@@ -1,6 +1,7 @@
 package com.example.plavatvornica.prvamalenaaplikacija.rest_utils;
 
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedCrime;
+import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedCrimeOverYear;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedTeam;
 
@@ -28,6 +29,9 @@ public interface API {
 
     @GET("player/topCrimes/{name}")
     Call<List<FeedCrime>> listOfCrimes(@Path("name") String name);
+
+    @GET("player?start_date={year}-01-01&end_date={year}-12-31")
+    Call<List<FeedCrimeOverYear>> listOfCrimesOverYear(@Path("year") int year);
 
 
 }

@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenter;
@@ -15,8 +18,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemSelected;
 
-public class SecondActivity extends AppCompatActivity implements SecondInterface {
+public class SecondActivity extends AppCompatActivity implements SecondInterface,RecAdapter.ItemClickListener {
 
     public static final String EXTRA_PLAYER_NAME = "EXTRA_PLAYER";
     public static final String EXTRA_TEAM_NAME = "EXTRA_TEAM";
@@ -26,8 +30,9 @@ public class SecondActivity extends AppCompatActivity implements SecondInterface
     private RecAdapter recAdapter;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.tv_name) TextView tvName;
+    private List<Wrapper> cities;
 
-    public String [] separated;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,23 +40,17 @@ public class SecondActivity extends AppCompatActivity implements SecondInterface
         ButterKnife.bind(this);
         presenter = new ListPresenter();
 
-
-
         recAdapter = new RecAdapter();
         recyclerView.setAdapter(recAdapter);
-
+        recAdapter.setClickListener(this);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
 
         String name = getIntent().getStringExtra(EXTRA_PLAYER_NAME);
         String name1 = getIntent().getStringExtra(EXTRA_TEAM_NAME);
 
         if(name1!=null){
-
-            tvName.setText(name1);
-            presenter.getInfo(name1, this);
-            presenter.sortCrimes(name, this);
+            presenter.sortCrimes(this);
         }else{
             tvName.setText(name);
             presenter.getInfo(name, this);
@@ -60,24 +59,27 @@ public class SecondActivity extends AppCompatActivity implements SecondInterface
     }
 
     @Override
-    public void getNameOfPlayerOrTeam() {
-    }
+    public void getNameOfPlayerOrTeam() {}
 
     @Override
-    public void sendPlayersCrimes(List<String> list) {
+    public void sendPlayersCrimes(List<Wrapper> list) {
         recAdapter.setData(list);
     }
 
     @Override
-    public void sendSortedCrimes(List<String> list) {
+    public void sendSortedCrimes(List<Wrapper> list) {
         recAdapter.setData(list);
     }
 
     @Override
-    public void sendOldList(List<String> list) {
-        recAdapter.oldOne(list);
+    public void sendClick() {
+
     }
 
 
+    @Override
+    public void onClick(View view, int position) {
+        Toast.makeText(view.getContext(), position.getText(), Toast.LENGTH_SHORT).show();
+    }
 }
 

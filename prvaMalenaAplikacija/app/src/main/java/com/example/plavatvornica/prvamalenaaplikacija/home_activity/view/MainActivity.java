@@ -10,6 +10,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter.HomePresenter;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView (R.id.tv_worst_crime_value) TextView tvCrime;
     @BindView (R.id.tv_worst_player_value) TextView tvPlayer;
     @BindView (R.id.tv_worst_team_value) TextView tvTeam;
+
 
 
     private HomePresenter presenter;
@@ -53,6 +55,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @OnClick(R.id.btn_third_act)
+    public void openActivity2(View view){
+
+        Intent intent = new Intent(this, ThirdActivity.class);
+        startActivity(intent);
+    }
+
+
     @Override
     public void onClick(View v){
         presenter.getData(this);
@@ -67,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setupWorstTeam(String team) {
         tvTeam.setText(team);
     }
+
 //imolemenatcija funkcije u interface-u
     @Override
     public void setupWorstCrime(String crime) {
@@ -78,8 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra(SecondActivity.EXTRA_PLAYER_NAME, player);
         startActivity(intent);
-
-
     }
 
     @Override
