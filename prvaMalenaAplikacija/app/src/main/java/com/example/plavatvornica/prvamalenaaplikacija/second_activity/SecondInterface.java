@@ -1,5 +1,7 @@
 package com.example.plavatvornica.prvamalenaaplikacija.second_activity;
 
+import android.view.View;
+
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
 
 import java.util.List;
@@ -15,6 +17,5 @@ public interface SecondInterface {
 
     void sendSortedCrimes(List<Wrapper> list);
 
-    void sendClick();
-
+    void onClick(View view, String text);
 }

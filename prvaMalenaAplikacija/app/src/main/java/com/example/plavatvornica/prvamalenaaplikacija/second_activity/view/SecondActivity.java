@@ -18,9 +18,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemSelected;
 
-public class SecondActivity extends AppCompatActivity implements SecondInterface,RecAdapter.ItemClickListener {
+public class SecondActivity extends AppCompatActivity implements SecondInterface {
 
     public static final String EXTRA_PLAYER_NAME = "EXTRA_PLAYER";
     public static final String EXTRA_TEAM_NAME = "EXTRA_TEAM";
@@ -30,8 +29,6 @@ public class SecondActivity extends AppCompatActivity implements SecondInterface
     private RecAdapter recAdapter;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.tv_name) TextView tvName;
-    private List<Wrapper> cities;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,24 +59,16 @@ public class SecondActivity extends AppCompatActivity implements SecondInterface
     public void getNameOfPlayerOrTeam() {}
 
     @Override
-    public void sendPlayersCrimes(List<Wrapper> list) {
-        recAdapter.setData(list);
-    }
-
+    public void sendPlayersCrimes(List<Wrapper> list) { recAdapter.addDataIntoRecycler(list); }
     @Override
     public void sendSortedCrimes(List<Wrapper> list) {
-        recAdapter.setData(list);
+        recAdapter.addDataIntoRecycler(list);
     }
 
     @Override
-    public void sendClick() {
+    public void onClick(View view, String text) {
 
-    }
-
-
-    @Override
-    public void onClick(View view, int position) {
-        Toast.makeText(view.getContext(), position.getText(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 }
 

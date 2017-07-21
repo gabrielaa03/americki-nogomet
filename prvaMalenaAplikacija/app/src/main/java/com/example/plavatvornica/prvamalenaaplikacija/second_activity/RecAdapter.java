@@ -17,35 +17,31 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper.TYPE_ELEMENT;
+import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper.TYPE_HEADER;
+
 /**
  * Created by Gabriela on 18.7.2017..
  */
 
 
 
-public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final int TYPE_ELEMENT = 0;
-    public static final int TYPE_HEADER = 1;
-    private String numberOfElements="";
-
-    ArrayList<Wrapper> recList = null;
-    ItemClickListener clickListener;
-
+public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    ArrayList<Wrapper> recList = new ArrayList<>();
+    SecondInterface clickListener;
+    String text;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         switch (viewType) {
             case TYPE_ELEMENT:
-                View viewONE = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_cell_layout, parent, false);
-                ItemHolder rowONE = new ItemHolder(viewONE);
-                return rowONE;
-
+                return new ItemHolder(view);
             case TYPE_HEADER:
-                View viewTWO = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_cell_layout_header, parent, false);
-                HeaderHolder rowTWO = new HeaderHolder(viewTWO);
-                return rowTWO;
+                return new HeaderHolder(view);
 
-        }return null;
+        }
+        return null;
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -59,7 +55,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_HEADER:
                 HeaderHolder headerHolder = (HeaderHolder) holder;
                 headerHolder.cell1.setText(item.getText());
-                headerHolder.cellCount.setText(numberOfElements);
+
                 break;
         }
     }
@@ -69,9 +65,10 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return (recList == null) ? 0 : recList.size();
     }
 
+
+
     public class HeaderHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_recycler_cell1)TextView cell1;
-        @BindView(R.id.tv_recycler_cell_count)TextView cellCount;
 
 
         public HeaderHolder(View itemView) {
@@ -80,7 +77,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(SecondInterface itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
@@ -92,36 +89,22 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View v) {
-            if (clickListener != null) clickListener.onClick(v, getAdapterPosition());
+            text = recList.get(getAdapterPosition()).getText();
+            if (clickListener != null) clickListener.onClick(v, text);
         }
-    }
-
-
-    public interface ItemClickListener {
-        void onClick(View view, int position);
     }
 
     @Override
     public int getItemViewType(int position) {
-        Wrapper pos = recList.get(position);
-        int viewType = 0;
-        if (pos.getType() == TYPE_ELEMENT) {
-            viewType = TYPE_ELEMENT;
-        } else if (pos.getType() == TYPE_HEADER) {
-            viewType = TYPE_HEADER;
-        }
-
-        return viewType;
-
+        return recList.get(position).getType();
     }
 
-    public void setData(List<Wrapper> list){
-        recList = new ArrayList<>();
+    public void addDataIntoRecycler(List<Wrapper> list){
+        recList.clear();
         recList.addAll(list);
         notifyDataSetChanged();
     }

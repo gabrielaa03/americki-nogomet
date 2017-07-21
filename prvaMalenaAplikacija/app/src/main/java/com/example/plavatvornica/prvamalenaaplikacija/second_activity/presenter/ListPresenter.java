@@ -43,7 +43,7 @@ public class ListPresenter{
                 Collections.sort(listOfAllCrimes);
                 List<Wrapper> list1 = new ArrayList<>();
 
-                for(int i =0; i < listOfAllCrimes.size(); i++){
+                for(int i =0; i <= listOfAllCrimes.size(); i++){
 
                     if(listOfAllCrimes.size()>(i+1) && listOfAllCrimes.get(i+1) != null) {
                             if(i==0) {
@@ -54,14 +54,16 @@ public class ListPresenter{
                                 list1.add(new Wrapper(listOfAllCrimes.get(i), Wrapper.TYPE_ELEMENT));
                             }
 
+
                             else{
                                 list1.add(new Wrapper(listOfAllCrimes.get(i), Wrapper.TYPE_ELEMENT));
                                 list1.add(new Wrapper(listOfAllCrimes.get(i+1).substring(0, 1), Wrapper.TYPE_HEADER));
-
                             }
-                        }
+                    }
+                    else  if(i==listOfAllCrimes.size()-1) {
+                        list1.add(new Wrapper(listOfAllCrimes.get(i), Wrapper.TYPE_ELEMENT));
+                    }
                 }
-
                 listener.sendSortedCrimes(list1);
             }
                 @Override

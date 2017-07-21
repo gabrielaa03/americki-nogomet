@@ -1,6 +1,8 @@
 package com.example.plavatvornica.prvamalenaaplikacija.third_activity;
 
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedCrimeOverYear;
+import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
+import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second;
 
 import java.util.List;
 
@@ -10,5 +12,5 @@ import java.util.List;
 
 public interface Fragmentinterface {
 
-    void sendListOfCrimesOverYear (List<String> list);
+    void sendListOfCrimesOverYear (List<Wrapper_Second> list);
 }
