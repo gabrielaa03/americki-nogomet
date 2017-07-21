@@ -30,8 +30,8 @@ public interface API {
     @GET("player/topCrimes/{name}")
     Call<List<FeedCrime>> listOfCrimes(@Path("name") String name);
 
-    @GET("player?start_date={year}-01-01&end_date={year}-12-31")
-    Call<List<FeedCrimeOverYear>> listOfCrimesOverYear(@Path("year") int year);
+    @GET("player")
+    Call<List<FeedCrimeOverYear>> listOfCrimesOverYear(@Query("start_date") String start_date, @Query("end_date") String end_date);
 
 
 }

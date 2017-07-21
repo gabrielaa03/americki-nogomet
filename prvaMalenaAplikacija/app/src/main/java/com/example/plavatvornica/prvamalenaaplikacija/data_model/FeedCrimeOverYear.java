@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class FeedCrimeOverYear {
+
     @SerializedName("Name")
     @Expose
     private String name;

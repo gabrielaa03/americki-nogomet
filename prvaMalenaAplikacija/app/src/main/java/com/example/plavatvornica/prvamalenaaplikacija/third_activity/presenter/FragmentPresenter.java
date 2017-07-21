@@ -23,6 +23,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.third_activity.Fragmentint
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -63,12 +64,14 @@ public class FragmentPresenter extends Fragment {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
+
         layoutManager = new LinearLayoutManager(getActivity());
 
         recyclerViewFragment.setAdapter(mAdapter);
@@ -77,16 +80,19 @@ public class FragmentPresenter extends Fragment {
 
     }
 
-    public void getCrimesOverYear(int year, final Fragmentinterface listener){
-        feedCrimeOverYear= RestUtils.getApi().listOfCrimesOverYear(year);
+    public void getCrimesOverYear(String start, String end, final Fragmentinterface listener){
+        feedCrimeOverYear= RestUtils.getApi().listOfCrimesOverYear(start,end);
         feedCrimeOverYear.enqueue(new Callback<List<FeedCrimeOverYear>>() {
             @Override
             public void onResponse(Call<List<FeedCrimeOverYear>> call, Response<List<FeedCrimeOverYear>> response) {
                 List<FeedCrimeOverYear> list = response.body();
+
                 for(int i=0; i<list.size();i++){
+                    lCrimeOverYear.add(new Wrapper_Second(list.get(i).getTeam(), Wrapper_Second.TYPE_NAME_OF_TEAM));
                     lCrimeOverYear.add(new Wrapper_Second(list.get(i).getName(), Wrapper_Second.TYPE_NAME_OF_PLAYER));
                 }
                 listener.sendListOfCrimesOverYear(lCrimeOverYear);
+
             }
 
             @Override

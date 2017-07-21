@@ -59,13 +59,10 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 break;
         }
     }
-
     @Override
     public int getItemCount() {
         return (recList == null) ? 0 : recList.size();
     }
-
-
 
     public class HeaderHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_recycler_cell1)TextView cell1;
@@ -97,7 +94,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             if (clickListener != null) clickListener.onClick(v, text);
         }
     }
-
     @Override
     public int getItemViewType(int position) {
         return recList.get(position).getType();
