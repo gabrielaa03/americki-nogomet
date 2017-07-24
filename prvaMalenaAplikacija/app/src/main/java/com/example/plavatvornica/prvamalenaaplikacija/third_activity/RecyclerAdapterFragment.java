@@ -91,4 +91,6 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
         list.addAll(list1);
         notifyDataSetChanged();
     }
+
+
 }
