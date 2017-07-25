@@ -2,6 +2,8 @@ package com.example.plavatvornica.prvamalenaaplikacija.third_activity.view;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +11,8 @@ import android.util.Log;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.BetweenFragmentAndActivityInterface;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.MyPageAdapter;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.ThirdPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,11 +20,12 @@ import butterknife.ButterKnife;
 
 public class ThirdActivity extends AppCompatActivity implements ThirdInterface,BetweenFragmentAndActivityInterface{
 
-    MyPageAdapter fragmentPagerAdapter;
+    MyPageAdapter myPageAdapter;
 
     @BindView(R.id.vpPager)ViewPager viewPager;
     @BindView(R.id.tabLayout) TabLayout tabLayout;
     ThirdPresenter presenter;
+    List<Fragment> fragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,48 +40,53 @@ public class ThirdActivity extends AppCompatActivity implements ThirdInterface,B
 
         presenter = new ThirdPresenter();
 
-        fragmentPagerAdapter = new MyPageAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(fragmentPagerAdapter);
+        myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(myPageAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-            @Override
-            public void onPageSelected(int position) {
-            }
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
-
     @Override
-    public void sendDataToActivity(String start_date, String end_date, int position) {
-        presenter.getCrimesOverYear(start_date, end_date, position, this);
+    public void sendDataToActivity(String start_date, String end_date, int pagePosition) {
+
+        Log.d("dabar", pagePosition + "");
+
+        presenter.getCrimesOverYear(start_date, end_date, pagePosition, this);
     }
 
     @Override
     public void sendListOfCrimesOverYear(List<Wrapper_Second> list, int pos) {
-        Log.d("tag", "OVO JE POSITION: " + pos);
 
-        List<Fragment> frag = getSupportFragmentManager().getFragments();
-        List<FirstFragment> firstFragmentsList =  new ArrayList<>();
-        for(int i=0; i<frag.size(); i++){
-            firstFragmentsList.add((FirstFragment) frag.get(i));
-        }
+        fragmentList = getSupportFragmentManager().getFragments();
 
-        FirstFragment fragment1 = FirstFragment.newInstance(pos);
-        //FirstFragment fragment1 = new FirstFragment();
-        for(FirstFragment fragment : firstFragmentsList){
-            if(Integer.parseInt(fragment.getArguments().get("position").toString())==pos){
-              //  int z =212+12;
+        for(Fragment fragment : fragmentList){
+            if(fragment != null){
+            int z = fragment.getArguments().getInt("position");
+            FirstFragment fragment1 = (FirstFragment) fragment;
+            if(z==pos){
                 fragment1.addListToAdapter(list);
+                break;
+            }
             }
         }
+    }
+    public class MyPageAdapter extends FragmentStatePagerAdapter {
+        //promjeniti sam na jedan fragment i proslijediti position
+        //u presenteru od fragmenta napraviti switch case koji prema position salje year
+        //saljem godinu u activity i on salje svom presenteru i on salje request na server
+        // i onda sve nazad u grafment
+        private int NUMBER_OF_ITEMS = 4;
+        public MyPageAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
+        @Override
+        public Fragment getItem(int position) {
+            return FirstFragment.newInstance(position);
+        }
+
+        @Override
+        public int getCount() {
+            return NUMBER_OF_ITEMS;
+        }
     }
 }

@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
+import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondInterface;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,22 +2,17 @@ package com.example.plavatvornica.prvamalenaaplikacija.third_activity.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.BetweenFragmentAndActivityInterface;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.FragmentInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.RecyclerAdapterFragment;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.FragmentPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +24,7 @@ import butterknife.Unbinder;
 
 public class FirstFragment extends Fragment implements FragmentInterface{
 
+    public static final String POSITION_KEY = "position_key";
     private Unbinder unbinder;
     @BindView(R.id.recycler_view_fragment)
     RecyclerView recyclerView;
@@ -36,6 +32,7 @@ public class FirstFragment extends Fragment implements FragmentInterface{
     RecyclerAdapterFragment adapter;
     FragmentPresenter presenter;
     BetweenFragmentAndActivityInterface listener;
+
     int pos;
 
 
@@ -50,7 +47,7 @@ public class FirstFragment extends Fragment implements FragmentInterface{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pos = getArguments() != null ? getArguments().getInt("position") : 0 ;
+       pos = getArguments() != null ? getArguments().getInt("position") : 1 ;
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -85,8 +82,8 @@ public class FirstFragment extends Fragment implements FragmentInterface{
     }
 
     @Override
-    public void sendDate(String start_date, String end_date, int position) {
-        listener.sendDataToActivity(start_date, end_date, position);
+    public void sendDate(String start_date, String end_date, int pagePosition) {
+        listener.sendDataToActivity(start_date, end_date, pagePosition);
      }
 
     public void addListToAdapter(List<Wrapper_Second> list){

@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenter;
 
 import java.util.List;

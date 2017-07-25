@@ -25,8 +25,8 @@ import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_
  */
 
 public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     ArrayList<Wrapper_Second> list = new ArrayList();
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

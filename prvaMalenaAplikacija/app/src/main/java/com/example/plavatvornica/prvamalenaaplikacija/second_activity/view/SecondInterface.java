@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.second_activity;
+package com.example.plavatvornica.prvamalenaaplikacija.second_activity.view;
 
 import android.view.View;
 

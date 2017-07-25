@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.home_activity;
+package com.example.plavatvornica.prvamalenaaplikacija.home_activity.view;
 
 /**
  * Created by Plava tvornica on 17.7.2017..

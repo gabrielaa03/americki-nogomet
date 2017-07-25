@@ -5,7 +5,7 @@ import android.util.Log;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedTeam;
-import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeInterface;
+import com.example.plavatvornica.prvamalenaaplikacija.home_activity.view.HomeInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.rest_utils.RestUtils;
 
 import java.util.List;

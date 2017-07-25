@@ -1,8 +1,6 @@
 package com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter;
 
-import android.util.Log;
-
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.FragmentInterface;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.FragmentInterface;
 
 /**
  * Created by Plava tvornica on 24.7.2017..
@@ -11,6 +9,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.third_activity.FragmentInt
 public class FragmentPresenter {
 
     String start_date, end_date;
+
     public void findFragment (int position, final FragmentInterface listener){
 
         switch(position){
@@ -34,8 +33,7 @@ public class FragmentPresenter {
                 end_date = "2013-12-31";
                 break;
         }
-
-        Log.d("odasdasd","ovo je position u fragment-presenter" + position);
-        listener.sendDate(start_date, end_date, position);
+        int pagePosition = position;
+        listener.sendDate(start_date, end_date, pagePosition);
     }
 }

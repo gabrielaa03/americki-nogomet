@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
-import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter.HomePresenter;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
