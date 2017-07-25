@@ -10,21 +10,22 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.ThirdPresenter;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.ThirdPresenterImpl;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ThirdActivity extends AppCompatActivity implements ThirdInterface,BetweenFragmentAndActivityInterface{
+public class ThirdActivity extends AppCompatActivity implements ThirdActivityContract.ThirdView,BetweenFragmentAndActivityInterface{
 
     MyPageAdapter myPageAdapter;
 
     @BindView(R.id.vpPager)ViewPager viewPager;
     @BindView(R.id.tabLayout) TabLayout tabLayout;
-    ThirdPresenter presenter;
+    ThirdActivityContract.ThirdPresenter presenter;
     List<Fragment> fragmentList;
 
     @Override
@@ -38,7 +39,7 @@ public class ThirdActivity extends AppCompatActivity implements ThirdInterface,B
         tabLayout.addTab(tabLayout.newTab().setText("2012"));
         tabLayout.addTab(tabLayout.newTab().setText("2013"));
 
-        presenter = new ThirdPresenter();
+        presenter = new ThirdPresenterImpl(this);
 
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myPageAdapter);
@@ -47,9 +48,6 @@ public class ThirdActivity extends AppCompatActivity implements ThirdInterface,B
     }
     @Override
     public void sendDataToActivity(String start_date, String end_date, int pagePosition) {
-
-        Log.d("dabar", pagePosition + "");
-
         presenter.getCrimesOverYear(start_date, end_date, pagePosition, this);
     }
 

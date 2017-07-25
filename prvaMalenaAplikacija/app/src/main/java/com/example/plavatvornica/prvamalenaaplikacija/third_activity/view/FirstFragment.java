@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.RecyclerAdapterFragment;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.FragmentPresenter;
 
@@ -22,7 +22,7 @@ import butterknife.Unbinder;
  * Created by Plava tvornica on 20.7.2017..
  */
 
-public class FirstFragment extends Fragment implements FragmentInterface{
+public class FirstFragment extends Fragment implements FragmentView {
 
     public static final String POSITION_KEY = "position_key";
     private Unbinder unbinder;

@@ -1,9 +1,8 @@
 package com.example.plavatvornica.prvamalenaaplikacija.rest_utils;
 
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedCrime;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedCrimeOverYear;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedPlayer;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.FeedTeam;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public interface API {
     Call<List<FeedCrime>> listOfCrimes(@Path("name") String name);
 
     @GET("player")
-    Call<List<FeedCrimeOverYear>> listOfCrimesOverYear(@Query("start_date") String start_date, @Query("end_date") String end_date);
+    Call<List<FeedPlayer>> listOfCrimesOverYear(@Query("start_date") String start_date, @Query("end_date") String end_date);
 
 
 }

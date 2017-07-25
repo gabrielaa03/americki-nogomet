@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondInterface;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +15,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper.TYPE_ELEMENT;
-import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper.TYPE_HEADER;
+import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper.TYPE_ELEMENT;
+import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper.TYPE_HEADER;
 
 /**
  * Created by Gabriela on 18.7.2017..
@@ -27,7 +26,7 @@ import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper.
 
 public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     ArrayList<Wrapper> recList = new ArrayList<>();
-    SecondInterface clickListener;
+    SecondActivityContract.SecondActivityView clickListener;
     String text;
 
     @Override
@@ -73,7 +72,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
     }
 
-    public void setClickListener(SecondInterface itemClickListener) {
+    public void setClickListener(SecondActivityContract.SecondActivityView itemClickListener) {
         this.clickListener = itemClickListener;
     }
 

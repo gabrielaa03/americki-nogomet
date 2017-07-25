@@ -1,13 +1,16 @@
-package com.example.plavatvornica.prvamalenaaplikacija.data_model;
+package com.example.plavatvornica.prvamalenaaplikacija.model.data_models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by Plava tvornica on 20.7.2017..
+ * Created by Plava tvornica on 17.7.2017..
  */
 
-public class FeedCrimeOverYear {
+public class FeedPlayer {
 
     @SerializedName("Name")
     @Expose
@@ -75,4 +78,5 @@ public class FeedCrimeOverYear {
     public void setArrestCount(String arrestCount) {
         this.arrestCount = arrestCount;
     }
+
 }

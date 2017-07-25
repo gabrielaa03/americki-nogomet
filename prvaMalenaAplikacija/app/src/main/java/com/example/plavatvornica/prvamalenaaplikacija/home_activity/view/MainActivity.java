@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
-import com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter.HomePresenter;
+import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract;
+import com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter.HomePresenterImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
 
@@ -15,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, HomeInterface{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, HomeContract.HomeActivityView {
 
 
     @BindView (R.id.button) Button button;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    private HomePresenter presenter;
+    private HomeContract.HomeActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +34,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.layout);
         ButterKnife.bind(this);
         button.setOnClickListener(this);
-        presenter = new HomePresenter();
+        presenter = new HomePresenterImpl(this);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        presenter.stopCalls();
+        presenter.onStop();
+
     }
 
     @OnClick(R.id.bCrime)
@@ -56,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @OnClick(R.id.btn_third_act)
     public void openActivity2(View view){
-
         Intent intent = new Intent(this, ThirdActivity.class);
         startActivity(intent);
     }
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v){
-        presenter.getData(this);
+
     }
 
     @Override

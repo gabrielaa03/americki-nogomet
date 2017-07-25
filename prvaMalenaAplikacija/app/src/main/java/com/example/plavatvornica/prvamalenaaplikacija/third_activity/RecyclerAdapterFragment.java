@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper;
-import com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second.TYPE_NAME_OF_PLAYER;
-import static com.example.plavatvornica.prvamalenaaplikacija.data_model.Wrapper_Second.TYPE_NAME_OF_TEAM;
+import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second.TYPE_NAME_OF_PLAYER;
+import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second.TYPE_NAME_OF_TEAM;
 
 /**
  * Created by Plava tvornica on 21.7.2017..

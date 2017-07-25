@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.data_model;
+package com.example.plavatvornica.prvamalenaaplikacija.model.data_models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

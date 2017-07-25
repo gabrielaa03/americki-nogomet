@@ -1,6 +1,6 @@
 package com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter;
 
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.FragmentInterface;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.FragmentView;
 
 /**
  * Created by Plava tvornica on 24.7.2017..
@@ -10,7 +10,7 @@ public class FragmentPresenter {
 
     String start_date, end_date;
 
-    public void findFragment (int position, final FragmentInterface listener){
+    public void findFragment (int position, final FragmentView listener){
 
         switch(position){
 
