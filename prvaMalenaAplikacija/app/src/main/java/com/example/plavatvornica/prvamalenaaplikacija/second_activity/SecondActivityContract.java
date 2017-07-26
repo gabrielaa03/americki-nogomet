@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public interface SecondActivityContract {
+
     interface SecondActivityView{
 
         void sendPlayersCrimes(List<Wrapper> list);
@@ -18,6 +19,7 @@ public interface SecondActivityContract {
         void sendSortedCrimes(List<Wrapper> list);
 
         void onClick(View view, String text);
+
     }
 
 
@@ -25,6 +27,7 @@ public interface SecondActivityContract {
         // inače se stavi uvijek BasePresenter koji sadrži ove dvije metode i svaki drugi presenter samo nasljeđuje ove osnovne metode start i stop, zato što se u njima odvija dohvaćanje podataka
         void onStart();
         void onStop();
-
+        void initialize(String playersName, String teamName);
     }
+
 }

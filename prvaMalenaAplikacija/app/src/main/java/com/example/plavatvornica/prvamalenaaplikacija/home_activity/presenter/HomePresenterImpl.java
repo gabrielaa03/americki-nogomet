@@ -56,7 +56,19 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
     }
 
     @Override
+    public void getNamePlayer() {
+        view.openListActivity(player);
+    }
+
+    @Override
+    public void getNameTeam() {
+        view.openSecondListActivity(team);
+    }
+
+
+    @Override
     public void onSuccess(List<FeedTeam> list) {
+
         int count = 0;
         int c;
         team = "";
@@ -90,8 +102,8 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
 
             }
         }
-
         view.setupWorstCrime(crime);
+
         //listener.setupWorstCrime(crime);
     }
 
@@ -122,14 +134,7 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
         Log.d("error","error");
     }
 
-    public void getNamePlayer(final HomeContract.HomeActivityView listener) {
-        listener.openListActivity(player);
 
-    }
-
-    public void getNameTeam(final HomeContract.HomeActivityView listener){
-        listener.openSecondListActivity(team);
-    }
 
 
 }

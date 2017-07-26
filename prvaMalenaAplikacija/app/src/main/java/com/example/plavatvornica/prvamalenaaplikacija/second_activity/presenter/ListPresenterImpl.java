@@ -22,6 +22,7 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
     SecondActivityContract.SecondActivityView view;
     ArrayList<Wrapper> listOfCrimes;
     CrimeInteractor interactor;
+    String player;
 
     public ListPresenterImpl(SecondActivityContract.SecondActivityView view) {
         this.view = view;
@@ -30,7 +31,7 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
 
     @Override
     public void onSuccess(List<FeedCrime> list, int type) {
-        if(type==1) {
+        if(type == 1) {
 
                 List<String> listOfAllCrimes = new ArrayList<String>();
                 for (int i = 0; i < list.size(); i++) {
@@ -56,10 +57,11 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
                     }
                 }
                 view.sendSortedCrimes(list1);
+
                 // listener.sendSortedCrimes(list1);
         }
 
-        else if (type == 2){
+        else {
 
                 listOfCrimes = new ArrayList<>();
                 for(int i =0; i< list.size(); i++){
@@ -76,11 +78,26 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
 
     @Override
     public void onStart() {
-        interactor.getAllCrimes(this);
     }
 
     @Override
     public void onStop() {
         interactor.stopCall();
     }
+
+    @Override
+    public void initialize(String playersName, String teamName) {
+        if(playersName!=null) {
+            {
+                player = playersName;
+                interactor.getPlayersCrimes(player, this);
+            }
+        }else{
+            interactor.getAllCrimes(this);
+        }
+    }
+
+
+
+
 }

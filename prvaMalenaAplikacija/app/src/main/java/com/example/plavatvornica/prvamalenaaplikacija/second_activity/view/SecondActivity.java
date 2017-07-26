@@ -13,6 +13,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondActivityContract;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenterImpl;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.BetweenFragmentAndActivityInterface;
 
 import java.util.List;
 
@@ -46,12 +47,15 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
         playerName = getIntent().getStringExtra(EXTRA_PLAYER_NAME);
         teamName = getIntent().getStringExtra(EXTRA_TEAM_NAME);
 
+        presenter.initialize(playerName, teamName);
+        tvName.setText(playerName);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.onStart();
+        presenter.initialize(playerName, teamName);
     }
 
     @Override
@@ -73,16 +77,8 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
         Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
-    public void getAttributes(){
 
-        if(teamName!=null){
-            {
-            presenter.sortCrimes(this);
-        }else{
-            tvName.setText(playerName);
-            presenter.getPlayersCrimes(playerName, this);
-        }
-        }
-    }
 }
+
+
 

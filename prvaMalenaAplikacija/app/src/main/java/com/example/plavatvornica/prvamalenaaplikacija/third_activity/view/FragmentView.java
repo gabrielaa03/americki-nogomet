@@ -6,5 +6,4 @@ package com.example.plavatvornica.prvamalenaaplikacija.third_activity.view;
 
 public interface FragmentView {
     void sendDate(String start_date, String end_date, int pagePosition);
-
 }

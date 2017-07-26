@@ -48,7 +48,7 @@ public class ThirdActivity extends AppCompatActivity implements ThirdActivityCon
     }
     @Override
     public void sendDataToActivity(String start_date, String end_date, int pagePosition) {
-        presenter.getCrimesOverYear(start_date, end_date, pagePosition, this);
+        presenter.getData(start_date, end_date, pagePosition);
     }
 
     @Override
@@ -67,11 +67,13 @@ public class ThirdActivity extends AppCompatActivity implements ThirdActivityCon
             }
         }
     }
+
     public class MyPageAdapter extends FragmentStatePagerAdapter {
         //promjeniti sam na jedan fragment i proslijediti position
         //u presenteru od fragmenta napraviti switch case koji prema position salje year
         //saljem godinu u activity i on salje svom presenteru i on salje request na server
         // i onda sve nazad u grafment
+
         private int NUMBER_OF_ITEMS = 4;
         public MyPageAdapter(FragmentManager fm) {
             super(fm);

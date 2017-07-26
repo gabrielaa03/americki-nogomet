@@ -33,7 +33,9 @@ public class FragmentPresenter {
                 end_date = "2013-12-31";
                 break;
         }
+
         int pagePosition = position;
         listener.sendDate(start_date, end_date, pagePosition);
+
     }
 }

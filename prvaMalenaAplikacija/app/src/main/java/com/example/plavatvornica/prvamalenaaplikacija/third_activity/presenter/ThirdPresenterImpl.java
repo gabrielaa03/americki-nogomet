@@ -23,9 +23,8 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
     ThirdActivityContract.ThirdView view;
     private List<Wrapper_Second> lCrimeOverYear;
     PlayerInteractor interactor;
-
-    Call<List<FeedPlayer>> feedCrimeOverYear;
-
+    String start_date, end_date;
+    int pagePos;
     public ThirdPresenterImpl(ThirdActivityContract.ThirdView view) {
         this.view = view;
         interactor = new PlayerInteractorImpl();
@@ -40,6 +39,7 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
             lCrimeOverYear.add(new Wrapper_Second(list.get(i).getName(), Wrapper_Second.TYPE_NAME_OF_PLAYER));
         }
         view.sendListOfCrimesOverYear(lCrimeOverYear, pagePosition);
+
     }
 
     @Override
@@ -54,12 +54,16 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
 
     @Override
     public void onStart() {
-        interactor.getCrimesOverYear(playerName, this);
+
     }
 
     @Override
     public void onStop() {
         interactor.stopCall();
+    }
 
+    @Override
+    public void getData(String start, String end, int pos) {
+        interactor.getCrimesOverYear(start, end, pos, this);
     }
 }

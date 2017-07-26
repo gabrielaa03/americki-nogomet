@@ -35,13 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
         button.setOnClickListener(this);
         presenter = new HomePresenterImpl(this);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.onStart();
+
     }
 
     @Override
@@ -51,14 +50,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onClick(View v){
+        presenter.onStart();
+    }
+
+
     @OnClick(R.id.bCrime)
     public void openActivity(View view) {
-       presenter.getNameTeam(this);
+       presenter.getNameTeam();
+
     }
 
     @OnClick(R.id.bPlayer)
     public void openActivity1(View view) {
-       presenter.getNamePlayer(this);
+       presenter.getNamePlayer();
     }
 
 
@@ -68,11 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-
-    @Override
-    public void onClick(View v){
-
-    }
 
     @Override
     public void setupWorstPlayer(String player) {

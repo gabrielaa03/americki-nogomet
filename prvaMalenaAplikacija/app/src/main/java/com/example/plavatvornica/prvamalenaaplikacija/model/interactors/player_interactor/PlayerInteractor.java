@@ -22,9 +22,4 @@ public interface PlayerInteractor {
         void getAllPlayers(PlayerListener listener);
         void getCrimesOverYear(String start, String end, final int pagePosition, PlayerListener listener);
         void stopCall();
-
-
-
-
-
 }

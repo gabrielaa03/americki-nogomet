@@ -23,8 +23,7 @@ import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.W
  */
 
 public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    ArrayList<Wrapper_Second> list = new ArrayList();
-
+    ArrayList<Wrapper_Second> list = new ArrayList<>();
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,7 +57,6 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
         { return (list == null) ? 0 : list.size();}
     }
 
-
     public class PlayerHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.recycler_cell_player)
         TextView cell_player;
@@ -85,6 +83,7 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public void addData(List<Wrapper_Second> list1){
+        list = new ArrayList<>();
         list.clear();
         list.addAll(list1);
         notifyDataSetChanged();
