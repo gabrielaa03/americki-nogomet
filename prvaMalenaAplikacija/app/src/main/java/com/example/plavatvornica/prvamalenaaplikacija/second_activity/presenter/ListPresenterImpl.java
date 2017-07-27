@@ -82,7 +82,7 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
 
     @Override
     public void onStop() {
-        interactor.stopCall();
+        interactor.disposeComp();
     }
 
     @Override
@@ -96,8 +96,4 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
             interactor.getAllCrimes(this);
         }
     }
-
-
-
-
 }

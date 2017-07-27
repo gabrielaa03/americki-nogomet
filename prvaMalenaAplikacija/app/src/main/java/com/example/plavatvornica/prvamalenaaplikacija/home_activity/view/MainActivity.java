@@ -11,6 +11,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter.HomePresenterImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
+import com.example.plavatvornica.prvamalenaaplikacija.time_activity.view.TimeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         presenter.onStop();
 
     }
-
     @Override
     public void onClick(View v){
         presenter.onStart();
@@ -74,6 +74,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+
+    @OnClick(R.id.btn_time_act)
+    public void openTimeActivity(View view){
+        Intent intent = new Intent(this, TimeActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void setupWorstPlayer(String player) {

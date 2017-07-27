@@ -1,16 +1,17 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter;
+package com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.presenter;
 
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.FragmentView;
+
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.FragmentContract;
 
 /**
  * Created by Plava tvornica on 24.7.2017..
  */
 
-public class FragmentPresenter {
+public class FragmentPresenterImpl implements FragmentContract.FragmentPresenter {
 
     String start_date, end_date;
 
-    public void findFragment (int position, final FragmentView listener){
+    public void findFragment (int position, final FragmentContract.FragmentView listener){
 
         switch(position){
 

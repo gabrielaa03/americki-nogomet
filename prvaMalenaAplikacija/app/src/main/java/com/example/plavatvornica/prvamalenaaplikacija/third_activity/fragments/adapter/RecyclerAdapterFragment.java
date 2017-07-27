@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity;
+package com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

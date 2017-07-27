@@ -50,9 +50,9 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
     @Override
     public void onStop() {
         // koristimo to u stop metodi kada zaustavimo da se provjera napravi
-        crimeInteractor.stopCall();
-        playerInteractor.stopCall();
-        teamInteractor.stopCall();
+        crimeInteractor.disposeComp();
+        playerInteractor.disposeComp();
+        teamInteractor.disposeComp();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
         }
 
         view.setupWorstTeam(team);
-        // listener.setupWorstTeam(team);
+
 
     }
 
@@ -104,7 +104,6 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
         }
         view.setupWorstCrime(crime);
 
-        //listener.setupWorstCrime(crime);
     }
 
     @Override
@@ -125,7 +124,6 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
             }
         }
         view.setupWorstPlayer(player);
-        //listener.setupWorstPlayer(player);
 
     }
 

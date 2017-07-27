@@ -6,7 +6,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam
 
 import java.util.List;
 
-import retrofit2.Call;
+
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -18,19 +19,19 @@ import retrofit2.http.Query;
 public interface API {
 
     @GET("team")
-    Call<List<FeedTeam>> getTeam();
+    Observable<List<FeedTeam>> getTeam();
 
     @GET("player")
-    Call<List<FeedPlayer>> getPlayer();
+    Observable<List<FeedPlayer>> getPlayer();
 
     @GET("crime")
-    Call<List<FeedCrime>> getCrime();
+    Observable<List<FeedCrime>> getCrime();
 
     @GET("player/topCrimes/{name}")
-    Call<List<FeedCrime>> listOfCrimes(@Path("name") String name);
+    Observable<List<FeedCrime>> listOfCrimes(@Path("name") String name);
 
     @GET("player")
-    Call<List<FeedPlayer>> listOfCrimesOverYear(@Query("start_date") String start_date, @Query("end_date") String end_date);
+    Observable<List<FeedPlayer>> listOfCrimesOverYear(@Query("start_date") String start_date, @Query("end_date") String end_date);
 
 
 }

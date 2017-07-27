@@ -13,8 +13,6 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondActivityContract;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenterImpl;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.BetweenFragmentAndActivityInterface;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,7 +34,7 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity_layout);
-        ButterKnife.bind(this);
+
         presenter = new ListPresenterImpl(this);
 
         recAdapter = new RecAdapter();

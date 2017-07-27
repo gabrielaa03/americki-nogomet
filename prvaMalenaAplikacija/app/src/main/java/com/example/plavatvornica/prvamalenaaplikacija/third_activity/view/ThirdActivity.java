@@ -7,11 +7,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.adapters.MyPageAdapter;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.view.FirstFragment;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.ThirdPresenterImpl;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ThirdActivity extends AppCompatActivity implements ThirdActivityContract.ThirdView,BetweenFragmentAndActivityInterface{
+public class ThirdActivity extends AppCompatActivity implements ThirdActivityContract.ThirdView,ThirdActivityContract.BetweenFragmentAndActivityInterface{
 
     MyPageAdapter myPageAdapter;
 
@@ -34,10 +35,7 @@ public class ThirdActivity extends AppCompatActivity implements ThirdActivityCon
         setContentView(R.layout.activity_third);
         ButterKnife.bind(this);
 
-        tabLayout.addTab(tabLayout.newTab().setText("2010"));
-        tabLayout.addTab(tabLayout.newTab().setText("2011"));
-        tabLayout.addTab(tabLayout.newTab().setText("2012"));
-        tabLayout.addTab(tabLayout.newTab().setText("2013"));
+        tabLayout.setupWithViewPager(viewPager);
 
         presenter = new ThirdPresenterImpl(this);
 
@@ -68,25 +66,4 @@ public class ThirdActivity extends AppCompatActivity implements ThirdActivityCon
         }
     }
 
-    public class MyPageAdapter extends FragmentStatePagerAdapter {
-        //promjeniti sam na jedan fragment i proslijediti position
-        //u presenteru od fragmenta napraviti switch case koji prema position salje year
-        //saljem godinu u activity i on salje svom presenteru i on salje request na server
-        // i onda sve nazad u grafment
-
-        private int NUMBER_OF_ITEMS = 4;
-        public MyPageAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return FirstFragment.newInstance(position);
-        }
-
-        @Override
-        public int getCount() {
-            return NUMBER_OF_ITEMS;
-        }
-    }
 }

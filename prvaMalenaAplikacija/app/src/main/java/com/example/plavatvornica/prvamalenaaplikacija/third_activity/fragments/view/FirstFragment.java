@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.view;
+package com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.RecyclerAdapterFragment;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.FragmentPresenter;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.adapter.RecyclerAdapterFragment;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.FragmentContract;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.presenter.FragmentPresenterImpl;
 
 import java.util.List;
 import butterknife.BindView;
@@ -22,16 +24,15 @@ import butterknife.Unbinder;
  * Created by Plava tvornica on 20.7.2017..
  */
 
-public class FirstFragment extends Fragment implements FragmentView {
+public class FirstFragment extends Fragment implements FragmentContract.FragmentView {
 
-    public static final String POSITION_KEY = "position_key";
     private Unbinder unbinder;
     @BindView(R.id.recycler_view_fragment)
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerAdapterFragment adapter;
-    FragmentPresenter presenter;
-    BetweenFragmentAndActivityInterface listener;
+    FragmentPresenterImpl presenter;
+    ThirdActivityContract.BetweenFragmentAndActivityInterface listener;
 
     int pos;
 
@@ -57,7 +58,7 @@ public class FirstFragment extends Fragment implements FragmentView {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        presenter = new FragmentPresenter();
+        presenter = new FragmentPresenterImpl();
         presenter.findFragment(pos, this);
 
         layoutManager = new LinearLayoutManager(getContext());
@@ -78,7 +79,7 @@ public class FirstFragment extends Fragment implements FragmentView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (BetweenFragmentAndActivityInterface) context;
+        listener = (ThirdActivityContract.BetweenFragmentAndActivityInterface) context;
     }
 
     @Override

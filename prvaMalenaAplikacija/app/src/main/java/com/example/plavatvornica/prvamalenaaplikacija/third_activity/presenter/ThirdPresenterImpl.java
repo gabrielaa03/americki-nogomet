@@ -11,7 +11,6 @@ import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivi
 
 import java.util.ArrayList;
 import java.util.List;
-import retrofit2.Call;
 
 
 /**
@@ -59,7 +58,7 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
 
     @Override
     public void onStop() {
-        interactor.stopCall();
+        interactor.disposeComp();
     }
 
     @Override
