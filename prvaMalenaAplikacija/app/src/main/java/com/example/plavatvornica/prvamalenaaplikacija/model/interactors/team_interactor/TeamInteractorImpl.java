@@ -3,7 +3,6 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_in
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor.listeners.TeamListener;
-import com.example.plavatvornica.prvamalenaaplikacija.model_test.interactors.test_interactor.listeners.TestListener;
 import com.example.plavatvornica.prvamalenaaplikacija.rest_utils.RestUtils;
 
 import java.util.List;
@@ -11,12 +10,8 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Plava tvornica on 25.7.2017..
@@ -29,8 +24,7 @@ public class TeamInteractorImpl extends BaseInteractorImpl implements TeamIntera
     @Override
     public void getAllTeams(final TeamListener listener1) {
 
-        Observable<List<FeedTeam>> feedTeam = RestUtils.getApi().getTeam();
-        compositeDisposable.add(feedTeam.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        compositeDisposable.add(getAllTeamsObservable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<FeedTeam>>() {
                     @Override
                     public void onNext(List<FeedTeam> feedTeams) {
@@ -48,6 +42,12 @@ public class TeamInteractorImpl extends BaseInteractorImpl implements TeamIntera
                     }
                 }));
        }
+
+
+    @Override
+    public Observable<List<FeedTeam>> getAllTeamsObservable() {
+        return RestUtils.getApi().getTeam();
+    }
 
 }
 

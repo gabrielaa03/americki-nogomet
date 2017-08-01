@@ -9,6 +9,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.rest_utils.RestUtils;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,5 +23,7 @@ import static android.content.ContentValues.TAG;
 public interface PlayerInteractor extends BaseInteractor {
         void getAllPlayers(PlayerListener listener);
         void getCrimesOverYear(String start, String end, final int pagePosition, PlayerListener listener);
+        Observable<List<FeedPlayer>> getCrimesOverYearObservable(String start, String end);
+        Observable<List<FeedPlayer>> getAllPlayersObservable();
 
 }

@@ -10,7 +10,10 @@ import com.example.plavatvornica.prvamalenaaplikacija.rest_utils.RestUtils;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -30,8 +33,8 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Override
     public void getAllPlayers(final PlayerListener listener) {
-        Observable<List<FeedPlayer>> feedPlayer = RestUtils.getApi().getPlayer();
-        compositeDisposable.add(feedPlayer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+
+        compositeDisposable.add(getAllPlayersObservable().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<FeedPlayer>>() {
                     @Override
                     public void onNext(List<FeedPlayer> feedPlayers) {
@@ -53,8 +56,8 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
     @Override
     public void getCrimesOverYear(final String start, final String end, final int pagePosition, final PlayerListener listener) {
 
-        Observable<List<FeedPlayer>> feedCrimeOverYear = RestUtils.getApi().listOfCrimesOverYear(start, end);
-        compositeDisposable.add(feedCrimeOverYear.subscribeOn(Schedulers.io())
+
+        compositeDisposable.add(getCrimesOverYearObservable(start, end).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<FeedPlayer>>() {
                     @Override
@@ -73,6 +76,15 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
 
                     }
                 }));
+    }
+
+
+    public Observable<List<FeedPlayer>> getCrimesOverYearObservable(String start, String end) {
+        return RestUtils.getApi().listOfCrimesOverYear(start, end);
+    }
+
+    public Observable<List<FeedPlayer>> getAllPlayersObservable() {
+        return RestUtils.getApi().getPlayer();
     }
 
 }

@@ -6,7 +6,9 @@ import android.util.TimeFormatException;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.TimeContract;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -35,13 +37,10 @@ public class TimePresenterImpl implements TimeContract.TimePresenter{
                 Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long aLong) {
-                        String time = DateFormat.getTimeInstance().format(new Date());
-                        String [] parts = time.split(":");
-                        String part0 = parts[0];
-                        String part1 = parts[1];
-                        String part2 = parts[2];
-                        String finalTime = "JEDNOM " + part0 + " IZ " + part1 + " TRI " + part2+ " PUTA ";
-                        view.sendTimeData(finalTime);
+                        long time = System.currentTimeMillis();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+                        Date resultdate = new Date(time);
+                        view.sendTimeData(simpleDateFormat.format(resultdate));
                     }
 
                     @Override
@@ -59,6 +58,6 @@ public class TimePresenterImpl implements TimeContract.TimePresenter{
 
     @Override
     public void onStop() {
-
+        compositeDisposable.dispose();
     }
 }

@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper.TYPE_ELEMENT;
 import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper.TYPE_HEADER;
@@ -37,7 +38,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 return new ItemHolder(view);
             case TYPE_HEADER:
                 return new HeaderHolder(view);
-
         }
         return null;
     }
@@ -53,7 +53,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             case TYPE_HEADER:
                 HeaderHolder headerHolder = (HeaderHolder) holder;
                 headerHolder.cell1.setText(item.getText());
-
                 break;
         }
     }
@@ -102,7 +101,5 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         recList.addAll(list);
         notifyDataSetChanged();
     }
-
-
 
 }

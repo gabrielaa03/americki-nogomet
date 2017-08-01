@@ -24,8 +24,8 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     public static final String EXTRA_TEAM_NAME = "EXTRA_TEAM";
 
     private SecondActivityContract.ListPresenter presenter;
-    private RecyclerView.LayoutManager layoutManager;
     private RecAdapter recAdapter;
+    private RecyclerView.LayoutManager layoutManager;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.tv_name) TextView tvName;
     String teamName, playerName;
@@ -34,6 +34,7 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity_layout);
+        ButterKnife.bind(this);
 
         presenter = new ListPresenterImpl(this);
 
@@ -42,6 +43,7 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
         recAdapter.setClickListener(this);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         playerName = getIntent().getStringExtra(EXTRA_PLAYER_NAME);
         teamName = getIntent().getStringExtra(EXTRA_TEAM_NAME);
 
@@ -74,8 +76,6 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
 
         Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT).show();
     }
-
-
 }
 
 

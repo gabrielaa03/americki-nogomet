@@ -11,6 +11,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.rest_utils.RestUtils;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +25,7 @@ import static android.content.ContentValues.TAG;
 public interface TeamInteractor extends BaseInteractor {
 
     void getAllTeams(TeamListener listener);
+    Observable<List<FeedTeam>> getAllTeamsObservable();
 
 
 

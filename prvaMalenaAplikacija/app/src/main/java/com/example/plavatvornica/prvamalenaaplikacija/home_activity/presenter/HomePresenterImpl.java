@@ -6,9 +6,13 @@ import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.HomeContainer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
+import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor.HomeInteractor;
+import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor.HomeInteractorImpl;
+import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor.Listener.HomeListener;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.listeners.PlayerListener;
@@ -24,35 +28,29 @@ import java.util.List;
 
 //obrađivanje podataka
 
-public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,CrimeListener,TeamListener,PlayerListener{
+public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,HomeListener{
 
     private HomeContract.HomeActivityView view;
-    private CrimeInteractor crimeInteractor;
-    private TeamInteractor teamInteractor;
-    private PlayerInteractor playerInteractor;
+    private HomeInteractor homeInteractor;
     private String player, team, crime;
 
 
     public HomePresenterImpl(HomeContract.HomeActivityView view) {
         this.view = view;
-        crimeInteractor = new CrimeInteractorImpl();
-        playerInteractor = new PlayerInteractorImpl();
-        teamInteractor = new TeamInteractorImpl();
+        homeInteractor = new HomeInteractorImpl();
     }
+
 
     @Override
     public void onStart() {
-        crimeInteractor.getAllCrimes(this);
-        playerInteractor.getAllPlayers(this);
-        teamInteractor.getAllTeams(this);
+        homeInteractor.getAll(this);
     }
 
     @Override
     public void onStop() {
         // koristimo to u stop metodi kada zaustavimo da se provjera napravi
-        crimeInteractor.disposeComp();
-        playerInteractor.disposeComp();
-        teamInteractor.disposeComp();
+        homeInteractor.disposeComp();
+
     }
 
     @Override
@@ -66,73 +64,58 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Cri
     }
 
 
+
     @Override
-    public void onSuccess(List<FeedTeam> list) {
+    public void onSuccess(HomeContainer homeContainer) {
+        List<FeedCrime> listCrime = homeContainer.getCrime();
+        List<FeedTeam> listTeam = homeContainer.getTeam();
+        List<FeedPlayer> listPlayer = homeContainer.getPlayer();
 
         int count = 0;
         int c;
         team = "";
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < listTeam.size(); i++) {
 
-            c = Integer.parseInt(list.get(i).getArrestCount());
+            c = Integer.parseInt(listTeam.get(i).getArrestCount());
             if (c > count) {
                 count = c;
-                team = list.get(i).getTeamPrefferedName();
+                team = listTeam.get(i).getTeamPrefferedName();
             }
         }
-
         view.setupWorstTeam(team);
 
 
-    }
+        int count1 = 0;
+        int c1;
+        crime = "";
 
-    @Override
-    public void onSuccess(List<FeedCrime> list, int type) {
-        if (type == 1) {
-            int count = 0;
-            int c;
-            crime = "";
-
-            for (int i = 0; i < list.size(); i++) {
-                c = Integer.parseInt(list.get(i).getArrestCount());
-                if (c > count) {
-                    count = c;
-                    crime = list.get(i).getCategory();
-                }
-
+        for (int i = 0; i < listCrime.size(); i++) {
+            c1 = Integer.parseInt(listCrime.get(i).getArrestCount());
+            if (c1 > count1) {
+                count1 = c1;
+                crime = listCrime.get(i).getCategory();
             }
         }
+
         view.setupWorstCrime(crime);
 
-    }
 
-    @Override
-    public void onSuccess1(String start, String end, int pagePosition, List<FeedPlayer> list) {
 
-    }
-
-    @Override
-    public void onSuccess2(List<FeedPlayer> list) {
-        int count = 0;
-        int c;
+        int count2 = 0;
+        int c2;
         player = "";
-        for (int i = 0; i < list.size(); i++) {
-            c = Integer.parseInt(list.get(i).getArrestCount());
-            if (c > count) {
-                count = c;
-                player = list.get(i).getName();
+            for (int i = 0; i < listPlayer.size(); i++) {
+            c2 = Integer.parseInt(listPlayer.get(i).getArrestCount());
+            if (c2 > count2) {
+                count2 = c2;
+                player = listPlayer.get(i).getName();
             }
         }
-        view.setupWorstPlayer(player);
-
-    }
+            view.setupWorstPlayer(player);
+}
 
     @Override
     public void onError() {
         Log.d("error","error");
     }
-
-
-
-
 }
