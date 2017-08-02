@@ -35,7 +35,6 @@ public class HomeInteractorImpl extends BaseInteractorImpl implements HomeIntera
 
 
     public void getAll(final HomeListener listener) {
-
         addObserver(Observable.zip(crimeInteractor.getAllCrimesObservable(), teamInteractor.getAllTeamsObservable(), playerInteractor.getAllPlayersObservable(), new Function3<List<FeedCrime>, List<FeedTeam>, List<FeedPlayer>, HomeContainer>() {
             @Override
             public HomeContainer apply(@NonNull List<FeedCrime> feedCrimes, @NonNull List<FeedTeam> feedTeams, @NonNull List<FeedPlayer> feedPlayers) throws Exception {
@@ -54,7 +53,5 @@ public class HomeInteractorImpl extends BaseInteractorImpl implements HomeIntera
 
             }
         }));
-
     }
-
 }

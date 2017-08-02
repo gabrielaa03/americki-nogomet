@@ -22,6 +22,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_int
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by Plava tvornica on 17.7.2017..
  */
@@ -34,7 +36,7 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
     private HomeInteractor homeInteractor;
     private String player, team, crime;
 
-
+    @Inject
     public HomePresenterImpl(HomeContract.HomeActivityView view) {
         this.view = view;
         homeInteractor = new HomeInteractorImpl();
@@ -63,8 +65,6 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
         view.openSecondListActivity(team);
     }
 
-
-
     @Override
     public void onSuccess(HomeContainer homeContainer) {
         List<FeedCrime> listCrime = homeContainer.getCrime();
@@ -84,7 +84,6 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
         }
         view.setupWorstTeam(team);
 
-
         int count1 = 0;
         int c1;
         crime = "";
@@ -98,8 +97,6 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
         }
 
         view.setupWorstCrime(crime);
-
-
 
         int count2 = 0;
         int c2;

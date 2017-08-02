@@ -13,21 +13,20 @@ import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.Secon
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.view.TimeActivity;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, HomeContract.HomeActivityView {
 
-
     @BindView (R.id.button) Button button;
     @BindView (R.id.tv_worst_crime_value) TextView tvCrime;
     @BindView (R.id.tv_worst_player_value) TextView tvPlayer;
     @BindView (R.id.tv_worst_team_value) TextView tvTeam;
 
-
-
-    private HomeContract.HomeActivityPresenter presenter;
+    @Inject private HomeContract.HomeActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +34,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.layout);
         ButterKnife.bind(this);
         button.setOnClickListener(this);
-        presenter = new HomePresenterImpl(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         presenter.onStop();
-
     }
     @Override
     public void onClick(View v){
         presenter.onStart();
     }
 
-
     @OnClick(R.id.bCrime)
     public void openActivity(View view) {
        presenter.getNameTeam();
-
     }
 
     @OnClick(R.id.bPlayer)
@@ -73,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, ThirdActivity.class);
         startActivity(intent);
     }
-
 
     @OnClick(R.id.btn_time_act)
     public void openTimeActivity(View view){
@@ -110,6 +103,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra(SecondActivity.EXTRA_TEAM_NAME, team);
         startActivity(intent);
     }
-
-
 }
