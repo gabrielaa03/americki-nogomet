@@ -22,11 +22,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInteractor{
 
-    @Inject
     RestInterface restInterface;
 
     @Inject
-    public CrimeInteractorImpl() {
+    public CrimeInteractorImpl(RestInterface restInterface) {
+        this.restInterface = restInterface;
+
     }
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
