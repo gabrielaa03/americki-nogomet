@@ -13,20 +13,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by Plava tvornica on 18.7.2017..
  */
 
 public class ListPresenterImpl implements SecondActivityContract.ListPresenter, CrimeListener{
 
-    SecondActivityContract.SecondActivityView view;
-    ArrayList<Wrapper> listOfCrimes;
-    CrimeInteractor interactor;
-    String player;
+    private SecondActivityContract.SecondActivityView view;
+    private ArrayList<Wrapper> listOfCrimes;
+    private CrimeInteractor interactor;
+    private String player;
 
-    public ListPresenterImpl(SecondActivityContract.SecondActivityView view) {
+@Inject
+    public ListPresenterImpl(SecondActivityContract.SecondActivityView view, CrimeInteractor interactor) {
         this.view = view;
-        interactor = new CrimeInteractorImpl();
+        this.interactor =  interactor;
     }
 
     @Override
@@ -58,7 +61,6 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
                 }
                 view.sendSortedCrimes(list1);
 
-                // listener.sendSortedCrimes(list1);
         }
 
         else {
@@ -68,7 +70,6 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
                     listOfCrimes.add(new Wrapper(list.get(i).getCategory1(), Wrapper.TYPE_ELEMENT));
                 }
                 view.sendPlayersCrimes(listOfCrimes);
-                // listener.sendPlayersCrimes(listOfCrimes);
         }
     }
 

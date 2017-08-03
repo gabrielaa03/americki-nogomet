@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.rest_utils;
+package com.example.plavatvornica.prvamalenaaplikacija.base;
 
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
@@ -16,7 +16,7 @@ import retrofit2.http.Query;
  * Created by Plava tvornica on 17.7.2017..
  */
 
-public interface API {
+public interface RestInterface {
 
     @GET("team")
     Observable<List<FeedTeam>> getTeam();

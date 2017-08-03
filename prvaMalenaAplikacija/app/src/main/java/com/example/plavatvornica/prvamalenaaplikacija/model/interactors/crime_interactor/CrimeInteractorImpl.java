@@ -1,18 +1,17 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor;
 
+import com.example.plavatvornica.prvamalenaaplikacija.base.RestInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
-import com.example.plavatvornica.prvamalenaaplikacija.rest_utils.RestUtils;
+import com.example.plavatvornica.prvamalenaaplikacija.base.ServiceModule;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -23,8 +22,15 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInteractor{
 
+    @Inject
+    RestInterface restInterface;
+
+    @Inject
+    public CrimeInteractorImpl() {
+    }
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     @Override
     public void getAllCrimes(final CrimeListener listener) {
 
@@ -46,7 +52,6 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
                     }
                 }));
     }
-
     @Override
     public void getPlayersCrimes(String playerName, final CrimeListener listener) {
 
@@ -68,15 +73,11 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
                     }
                 }));
     }
-
-
     public Observable<List<FeedCrime>> getPlayersCrimesObservable(String playerName) {
-        return RestUtils.getApi().listOfCrimes(playerName);
+        return restInterface.listOfCrimes(playerName);
     }
-
-
     public Observable<List<FeedCrime>> getAllCrimesObservable() {
-        return RestUtils.getApi().getCrime();
+        return restInterface.getCrime();
     }
 
 }

@@ -9,13 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.adapters.MyPageAdapter;
+import com.example.plavatvornica.prvamalenaaplikacija.third_activity.di.PagesModule;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.view.FirstFragment;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.ThirdPresenterImpl;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +30,7 @@ public class ThirdActivity extends AppCompatActivity implements ThirdActivityCon
 
     @BindView(R.id.vpPager)ViewPager viewPager;
     @BindView(R.id.tabLayout) TabLayout tabLayout;
+    @Inject
     ThirdActivityContract.ThirdPresenter presenter;
     List<Fragment> fragmentList;
 
@@ -33,15 +38,12 @@ public class ThirdActivity extends AppCompatActivity implements ThirdActivityCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
+        MyApplication.appComponent.plus(new PagesModule(this)).inject(this);
         ButterKnife.bind(this);
 
         tabLayout.setupWithViewPager(viewPager);
-
-        presenter = new ThirdPresenterImpl(this);
-
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myPageAdapter);
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
     @Override

@@ -37,9 +37,9 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
     private String player, team, crime;
 
     @Inject
-    public HomePresenterImpl(HomeContract.HomeActivityView view) {
+    public HomePresenterImpl(HomeContract.HomeActivityView view, HomeInteractor homeInteractor) {
         this.view = view;
-        homeInteractor = new HomeInteractorImpl();
+        this.homeInteractor = homeInteractor;
     }
 
 

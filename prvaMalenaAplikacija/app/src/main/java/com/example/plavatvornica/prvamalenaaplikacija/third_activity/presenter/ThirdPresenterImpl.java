@@ -12,6 +12,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivi
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 /**
  * Created by Plava tvornica on 20.7.2017..
@@ -19,19 +21,18 @@ import java.util.List;
 
 public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter, PlayerListener {
 
-    ThirdActivityContract.ThirdView view;
-    private List<Wrapper_Second> lCrimeOverYear;
-    PlayerInteractor interactor;
-    String start_date, end_date;
-    int pagePos;
-    public ThirdPresenterImpl(ThirdActivityContract.ThirdView view) {
+    private ThirdActivityContract.ThirdView view;
+    private PlayerInteractor interactor;
+
+    @Inject
+    public ThirdPresenterImpl(ThirdActivityContract.ThirdView view, PlayerInteractor interactor) {
         this.view = view;
-        interactor = new PlayerInteractorImpl();
+        this.interactor = interactor;
     }
 
     @Override
     public void onSuccess1(String start, String end, int pagePosition, List<FeedPlayer> list) {
-        lCrimeOverYear = new ArrayList<>();
+        List<Wrapper_Second> lCrimeOverYear = new ArrayList<>();
         assert list != null;
         for(int i = 0; i<list.size(); i++){
             lCrimeOverYear.add(new Wrapper_Second(list.get(i).getTeam(), Wrapper_Second.TYPE_NAME_OF_TEAM));

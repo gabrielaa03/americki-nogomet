@@ -9,11 +9,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.second_activity.di.ListModule;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenterImpl;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,21 +27,22 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     public static final String EXTRA_PLAYER_NAME = "EXTRA_PLAYER";
     public static final String EXTRA_TEAM_NAME = "EXTRA_TEAM";
 
-    private SecondActivityContract.ListPresenter presenter;
     private RecAdapter recAdapter;
     private RecyclerView.LayoutManager layoutManager;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.tv_name) TextView tvName;
     String teamName, playerName;
 
+    @Inject
+    SecondActivityContract.ListPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity_layout);
+        MyApplication.appComponent.plus(new ListModule(this)).inject(this);
+
         ButterKnife.bind(this);
-
-        presenter = new ListPresenterImpl(this);
-
         recAdapter = new RecAdapter();
         recyclerView.setAdapter(recAdapter);
         recAdapter.setClickListener(this);

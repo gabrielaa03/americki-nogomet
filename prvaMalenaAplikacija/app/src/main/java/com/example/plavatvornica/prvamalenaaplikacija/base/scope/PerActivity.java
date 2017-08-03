@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.di.scope;
+package com.example.plavatvornica.prvamalenaaplikacija.base.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,6 +10,6 @@ import javax.inject.Scope;
  */
 
 @Scope
-//@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface PerActivity {
 }

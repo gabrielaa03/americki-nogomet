@@ -15,6 +15,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_int
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -28,11 +30,16 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeInteractorImpl extends BaseInteractorImpl implements HomeInteractor{
 
-    private CrimeInteractor crimeInteractor = new CrimeInteractorImpl();
-    private PlayerInteractor playerInteractor = new PlayerInteractorImpl();
-    private TeamInteractor teamInteractor = new TeamInteractorImpl();
+    private CrimeInteractor crimeInteractor;
+    private PlayerInteractor playerInteractor;
+    private TeamInteractor teamInteractor;
 
-
+    @Inject
+    public HomeInteractorImpl(CrimeInteractor crimeInteractor, PlayerInteractor playerInteractor, TeamInteractor teamInteractor) {
+        this.crimeInteractor = crimeInteractor;
+        this.playerInteractor = playerInteractor;
+        this.teamInteractor = teamInteractor;
+    }
 
     public void getAll(final HomeListener listener) {
         addObserver(Observable.zip(crimeInteractor.getAllCrimesObservable(), teamInteractor.getAllTeamsObservable(), playerInteractor.getAllPlayersObservable(), new Function3<List<FeedCrime>, List<FeedTeam>, List<FeedPlayer>, HomeContainer>() {

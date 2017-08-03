@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract;
+import com.example.plavatvornica.prvamalenaaplikacija.home_activity.di.HomeModule;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter.HomePresenterImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
@@ -26,12 +28,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView (R.id.tv_worst_player_value) TextView tvPlayer;
     @BindView (R.id.tv_worst_team_value) TextView tvTeam;
 
-    @Inject private HomeContract.HomeActivityPresenter presenter;
+    @Inject
+    HomeContract.HomeActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
+
+        MyApplication.appComponent.plus(new HomeModule(this)).inject(this);
+
         ButterKnife.bind(this);
         button.setOnClickListener(this);
     }

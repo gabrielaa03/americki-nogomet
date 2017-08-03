@@ -7,8 +7,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.TimeContract;
+import com.example.plavatvornica.prvamalenaaplikacija.time_activity.di.TimeModule;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.presenter.TimePresenterImpl;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +21,7 @@ public class TimeActivity extends AppCompatActivity implements TimeContract.Time
 
     @BindView(R.id.tv_time)
     TextView tv;
-
+    @Inject
     TimeContract.TimePresenter presenter;
     String newTime;
 
@@ -25,6 +29,7 @@ public class TimeActivity extends AppCompatActivity implements TimeContract.Time
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
+        MyApplication.appComponent.plus(new TimeModule(this)).inject(this);
         presenter = new TimePresenterImpl(this);
         ButterKnife.bind(this);
 

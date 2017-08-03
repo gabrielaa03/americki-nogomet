@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -24,11 +26,9 @@ import io.reactivex.schedulers.Schedulers;
 public class TimePresenterImpl implements TimeContract.TimePresenter{
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private TimeContract.TimeView view;
-
-
+    @Inject
     public TimePresenterImpl(TimeContract.TimeView view) {
         this.view = view;
-
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor;
 
+import com.example.plavatvornica.prvamalenaaplikacija.base.RestInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor.listeners.TeamListener;
-import com.example.plavatvornica.prvamalenaaplikacija.rest_utils.RestUtils;
+import com.example.plavatvornica.prvamalenaaplikacija.base.ServiceModule;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,6 +23,13 @@ import io.reactivex.schedulers.Schedulers;
 public class TeamInteractorImpl extends BaseInteractorImpl implements TeamInteractor {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private RestInterface restInterface;
+
+    @Inject
+    public TeamInteractorImpl(RestInterface restInterface) {
+        this.restInterface = restInterface;
+    }
 
     @Override
     public void getAllTeams(final TeamListener listener1) {
@@ -38,15 +48,13 @@ public class TeamInteractorImpl extends BaseInteractorImpl implements TeamIntera
 
                     @Override
                     public void onComplete() {
-
                     }
                 }));
        }
 
-
     @Override
     public Observable<List<FeedTeam>> getAllTeamsObservable() {
-        return RestUtils.getApi().getTeam();
+        return restInterface.getTeam();
     }
 
 }
