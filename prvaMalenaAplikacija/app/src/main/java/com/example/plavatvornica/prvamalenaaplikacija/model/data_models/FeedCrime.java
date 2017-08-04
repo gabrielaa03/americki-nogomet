@@ -3,12 +3,15 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.data_models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Plava tvornica on 18.7.2017..
  */
 
-public class FeedCrime {
-
+public class FeedCrime extends RealmObject {
+    @PrimaryKey
     @SerializedName("Category")
     @Expose
     private String category;

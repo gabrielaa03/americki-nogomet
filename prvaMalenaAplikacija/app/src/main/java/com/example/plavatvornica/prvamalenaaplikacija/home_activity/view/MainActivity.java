@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.di.HomeModule;
-import com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter.HomePresenterImpl;
+import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.view.TimeActivity;
@@ -20,14 +19,13 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, HomeContract.HomeActivityView {
-
-    @BindView (R.id.button) Button button;
-    @BindView (R.id.tv_worst_crime_value) TextView tvCrime;
+public class MainActivity extends AppCompatActivity implements HomeContract.HomeActivityView{
+    @BindView(R.id.tv_worst_crime_value) TextView tvCrime;
     @BindView (R.id.tv_worst_player_value) TextView tvPlayer;
     @BindView (R.id.tv_worst_team_value) TextView tvTeam;
-
+    DatabaseHandle databaseHandle;
     @Inject
     HomeContract.HomeActivityPresenter presenter;
 
@@ -35,11 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
-
         MyApplication.appComponent.plus(new HomeModule(this)).inject(this);
-
         ButterKnife.bind(this);
-        button.setOnClickListener(this);
+
     }
 
     @Override
@@ -52,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
         presenter.onStop();
     }
-    @Override
-    public void onClick(View v){
+
+    @OnClick(R.id.btn_find)
+    public void openP(View view) {
         presenter.onStart();
     }
 
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    @OnClick(R.id.btn_time_act)
+    @OnClick(R.id.btn_time_act1)
     public void openTimeActivity(View view){
         Intent intent = new Intent(this, TimeActivity.class);
         startActivity(intent);
@@ -108,5 +105,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra(SecondActivity.EXTRA_TEAM_NAME, team);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        databaseHandle.destroyRealm();
     }
 }

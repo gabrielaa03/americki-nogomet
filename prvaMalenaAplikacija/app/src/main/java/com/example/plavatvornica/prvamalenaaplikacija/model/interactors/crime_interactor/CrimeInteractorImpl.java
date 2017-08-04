@@ -27,7 +27,6 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
     @Inject
     public CrimeInteractorImpl(RestInterface restInterface) {
         this.restInterface = restInterface;
-
     }
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -74,9 +73,7 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
                     }
                 }));
     }
-    public Observable<List<FeedCrime>> getPlayersCrimesObservable(String playerName) {
-        return restInterface.listOfCrimes(playerName);
-    }
+    public Observable<List<FeedCrime>> getPlayersCrimesObservable(String playerName) {return restInterface.listOfCrimes(playerName);}
     public Observable<List<FeedCrime>> getAllCrimesObservable() {
         return restInterface.getCrime();
     }

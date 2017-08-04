@@ -7,6 +7,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam
 import java.util.List;
 
 
+import dagger.Provides;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

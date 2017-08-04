@@ -6,6 +6,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
 
 import java.util.List;
 
+import dagger.Provides;
+
 /**
  * Created by Plava tvornica on 25.7.2017..
  */

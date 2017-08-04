@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_find"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Najzločestiji"
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Najzločestiji igrač: "
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/btn_find"
         android:padding="10dp"
         />
 
@@ -26,7 +26,7 @@
         android:id="@+id/tv_worst_player_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/btn_find"
         android:layout_toEndOf="@id/tv_worst_palyer_label"
         tools:text="dfgdreghrt"
         android:padding="10dp"
@@ -112,13 +112,13 @@
         android:text="ViewPager" />
 
     <Button
-        android:id="@+id/btn_time_act"
+        android:id="@+id/btn_time_act1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/btn_third_act"
-        android:layout_marginBottom="21dp"
-        android:text="ViewPager" />
+        android:text="Time"
+        android:layout_alignBaseline="@+id/btn_third_act"
+        android:layout_alignBottom="@+id/btn_third_act"
+        android:layout_toEndOf="@+id/btn_third_act" />
 
 
 </RelativeLayout>

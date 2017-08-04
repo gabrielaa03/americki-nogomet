@@ -2,6 +2,7 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_
 
 import com.example.plavatvornica.prvamalenaaplikacija.base.RestInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.listeners.PlayerListener;
 import com.example.plavatvornica.prvamalenaaplikacija.base.ServiceModule;
@@ -15,6 +16,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import io.realm.Realm;
 
 /**
  * Created by Plava tvornica on 25.7.2017..
@@ -23,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerInteractor {
 
     private RestInterface restInterface;
-
+    DatabaseHandle databaseHandle = new DatabaseHandle();
     @Inject
     public PlayerInteractorImpl(RestInterface restInterface) {
         this.restInterface = restInterface;

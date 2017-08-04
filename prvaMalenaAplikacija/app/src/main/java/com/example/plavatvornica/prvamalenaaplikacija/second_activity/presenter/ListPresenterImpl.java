@@ -15,6 +15,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.Provides;
+
 /**
  * Created by Plava tvornica on 18.7.2017..
  */

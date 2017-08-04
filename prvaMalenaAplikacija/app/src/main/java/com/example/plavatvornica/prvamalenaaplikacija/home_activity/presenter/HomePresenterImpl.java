@@ -1,5 +1,6 @@
 package com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract;
@@ -7,6 +8,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrim
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.HomeContainer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
@@ -24,6 +26,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.Provides;
+import io.realm.Realm;
+
 /**
  * Created by Plava tvornica on 17.7.2017..
  */
@@ -35,13 +40,13 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
     private HomeContract.HomeActivityView view;
     private HomeInteractor homeInteractor;
     private String player, team, crime;
+    DatabaseHandle databaseHandle = new DatabaseHandle();
 
     @Inject
     public HomePresenterImpl(HomeContract.HomeActivityView view, HomeInteractor homeInteractor) {
         this.view = view;
         this.homeInteractor = homeInteractor;
     }
-
 
     @Override
     public void onStart() {
@@ -52,7 +57,6 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
     public void onStop() {
         // koristimo to u stop metodi kada zaustavimo da se provjera napravi
         homeInteractor.disposeComp();
-
     }
 
     @Override

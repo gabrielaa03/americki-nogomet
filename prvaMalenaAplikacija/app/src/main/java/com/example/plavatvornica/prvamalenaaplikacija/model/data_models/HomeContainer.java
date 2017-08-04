@@ -2,6 +2,8 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.data_models;
 
 import java.util.List;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Plava tvornica on 1.8.2017..
  */

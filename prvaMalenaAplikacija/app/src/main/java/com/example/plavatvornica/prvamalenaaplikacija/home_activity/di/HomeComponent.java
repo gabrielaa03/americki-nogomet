@@ -2,7 +2,6 @@ package com.example.plavatvornica.prvamalenaaplikacija.home_activity.di;
 
 import com.example.plavatvornica.prvamalenaaplikacija.base.scope.PerActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.view.MainActivity;
-
 import dagger.Subcomponent;
 
 /**
@@ -11,5 +10,7 @@ import dagger.Subcomponent;
 @PerActivity
 @Subcomponent(modules = HomeModule.class)
 public interface HomeComponent {
+
     void inject(MainActivity mainActivity);
+
 }

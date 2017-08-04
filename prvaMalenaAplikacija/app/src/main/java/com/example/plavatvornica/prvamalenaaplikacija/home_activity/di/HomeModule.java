@@ -12,6 +12,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_i
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor.TeamInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor.TeamInteractorImpl;
 
+import javax.inject.Inject;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -35,9 +37,7 @@ public class HomeModule {
 
     @Provides
     @PerActivity
-    HomeContract.HomeActivityPresenter providePresenter(HomePresenterImpl homePresenter) {
-        return homePresenter;
-    }
+    HomeContract.HomeActivityPresenter providePresenter(HomePresenterImpl homePresenter) {return homePresenter;}
 
     @Provides
     @PerActivity

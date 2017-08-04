@@ -44,7 +44,6 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
 
     @Override
     public void onSuccess2(List<FeedPlayer> list) {
-
     }
 
     @Override
@@ -54,7 +53,6 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
 
     @Override
     public void onStart() {
-
     }
 
     @Override
