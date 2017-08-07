@@ -110,6 +110,6 @@ public class MainActivity extends AppCompatActivity implements HomeContract.Home
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        databaseHandle.destroyRealm();
+       // databaseHandle.destroyRealm();
     }
 }

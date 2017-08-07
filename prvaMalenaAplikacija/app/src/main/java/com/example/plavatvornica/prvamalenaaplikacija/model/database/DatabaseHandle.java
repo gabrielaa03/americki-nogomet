@@ -9,64 +9,57 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
 
 /**
  * Created by Plava tvornica on 4.8.2017..
  */
 
 public class DatabaseHandle {
-    Realm realm = Realm.getDefaultInstance();
 
-    public  void getFeedCrimes(final List<FeedCrime> listCrime){
+    public static void saveFeedCrimes(final List<FeedCrime> listCrime){
+        Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-              FeedCrime feedCrime = realm.createObject(FeedCrime.class);
-                for(int i=0; i<listCrime.size(); i++){
-                    feedCrime.setCategory(listCrime.get(i).getCategory());
-                    feedCrime.setCategory1(listCrime.get(i).getCategory1());
-                    feedCrime.setArrestCount(listCrime.get(i).getArrestCount());
-                }
+                realm.copyToRealmOrUpdate(listCrime);
             }
         });
     }
 
-    public void getFeedTeam(final List<FeedTeam> listTeam){
+    public static void saveFeedTeam(final List<FeedTeam> listTeam){
+        Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                FeedTeam feedTeam = realm.createObject(FeedTeam.class);
-                for (int i = 0; i < listTeam.size(); i++) {
-                    feedTeam.setArrestCount(listTeam. get(i).getArrestCount());
-                    feedTeam.setTeam(listTeam. get(i).getTeam());
-                    feedTeam.setTeamCity(listTeam. get(i).getTeamCity());
-                    feedTeam.setTeamPrefferedName(listTeam. get(i).getTeamPrefferedName());
-                    feedTeam.setTeamConference(listTeam. get(i).getTeamConference());
-                    feedTeam.setTeamLogoId(listTeam. get(i).getTeamLogoId());
-                    feedTeam.setTeamConferenceDivision(listTeam. get(i).getTeamConferenceDivision());
-                }
+           realm.copyToRealmOrUpdate(listTeam);
             }
         });
-
-
     }
 
-    public void getFeedPlayer(final List<FeedPlayer> listPlayer){
+    public static void saveFeedPlayer(final List<FeedPlayer> listPlayer){
+        Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                FeedPlayer feedPlayer = realm.createObject(FeedPlayer.class);
-                for(int i = 0; i<listPlayer.size();i++){
-                    feedPlayer.setArrestCount(listPlayer.get(i).getArrestCount());
-                    feedPlayer.setTeamCity(listPlayer.get(i).getTeamCity());
-                    feedPlayer.setTeam(listPlayer.get(i).getTeam());
-                    feedPlayer.setName(listPlayer.get(i).getName());
-                    feedPlayer.setPosition(listPlayer.get(i).getPosition());
-                    feedPlayer.setTeamName(listPlayer.get(i).getTeamName());
-            }
+             realm.copyToRealmOrUpdate(listPlayer);
         }});
     }
 
-    public void destroyRealm(){realm.close();}
+    public static List<FeedPlayer> getFeedPlayer(){
+        Realm realm = Realm.getDefaultInstance();
+        return realm.where(FeedPlayer.class).findAll();
+    }
 
+    public static List<FeedCrime> getFeedCrime(){
+        Realm realm = Realm.getDefaultInstance();
+        return realm.where(FeedCrime.class).findAll();
+
+    }
+
+    public static List<FeedTeam> getFeedTeam() {
+        Realm realm = Realm.getDefaultInstance();
+        return realm.where(FeedTeam.class).findAll();
+    }
 }
