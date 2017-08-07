@@ -32,7 +32,6 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
         this.restInterface = restInterface;
     }
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Override
     public void getAllPlayers(final PlayerListener listener) {
         long currentTime = System.currentTimeMillis();
@@ -44,7 +43,7 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
             @Override
             public ObservableSource<List<FeedPlayer>> apply(@NonNull List<FeedPlayer> feedPlayers) throws Exception {
                 DatabaseHandle.saveFeedPlayer(feedPlayers);
-                lastResponseTime = System.currentTimeMillis();
+
                 return Observable.just(feedPlayers);
             }
         }).observeOn(AndroidSchedulers.mainThread())
@@ -63,6 +62,7 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
                     }
                 }));
         }
+        lastResponseTime = System.currentTimeMillis();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
                         @Override
                         public void onNext(List<FeedPlayer> feedPlayers) {
                             listener.onSuccess1(start, end, pagePosition, feedPlayers);
-                            lastResponseTime2 = System.currentTimeMillis();
+
                         }
 
                         @Override
@@ -98,6 +98,8 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
                         }
                     }));
         }
+
+        lastResponseTime2 = System.currentTimeMillis();
     }
 
 

@@ -27,8 +27,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TeamInteractorImpl extends BaseInteractorImpl implements TeamInteractor {
     private long lastResponseTime;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     private RestInterface restInterface;
 
     @Inject
@@ -54,7 +52,7 @@ public class TeamInteractorImpl extends BaseInteractorImpl implements TeamIntera
                         @Override
                         public void onNext(List<FeedTeam> feedTeams) {
                             listener1.onSuccess(feedTeams);
-                            lastResponseTime = System.currentTimeMillis();
+
                         }
 
                         @Override
@@ -67,6 +65,7 @@ public class TeamInteractorImpl extends BaseInteractorImpl implements TeamIntera
                         }
                     }));
         }
+        lastResponseTime = System.currentTimeMillis();
        }
 
     @Override

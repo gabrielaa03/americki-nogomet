@@ -76,7 +76,7 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
         long myTime = currentTime-lastResponseTime;
         List<FeedCrime> feedCrimeRealmResponse = DatabaseHandle.getFeedCrime();
 
-        if(myTime > 300000 || feedCrimeRealmResponse==null ) {
+        if(myTime > 300000 || feedCrimeRealmResponse == null ) {
             addObserver(getPlayersCrimesObservable(playerName).subscribeOn(Schedulers.io()).flatMap(new Function<List<FeedCrime>, ObservableSource<List<FeedCrime>>>() {
                 @Override
                 public ObservableSource<List<FeedCrime>> apply(@NonNull List<FeedCrime> feedCrimes) throws Exception {
