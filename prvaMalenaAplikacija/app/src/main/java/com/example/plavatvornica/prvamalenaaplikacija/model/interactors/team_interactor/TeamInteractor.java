@@ -15,10 +15,8 @@ import io.reactivex.Observable;
 public interface TeamInteractor extends BaseInteractor {
 
     void getAllTeams(TeamListener listener);
+
     Observable<List<FeedTeam>> getAllTeamsObservable();
-
-
-
 
 
 }

@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposable;
  * Created by Plava tvornica on 27.7.2017..
  */
 
-public class BaseInteractorImpl implements BaseInteractor{
+public class BaseInteractorImpl implements BaseInteractor {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -18,7 +18,7 @@ public class BaseInteractorImpl implements BaseInteractor{
     }
 
     public void addObserver(Disposable disposable) {
-        if (compositeDisposable == null || compositeDisposable.isDisposed() )
+        if (compositeDisposable == null || compositeDisposable.isDisposed())
             compositeDisposable = new CompositeDisposable();
 
         compositeDisposable.add(disposable);

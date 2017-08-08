@@ -5,6 +5,7 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.time_in
  */
 
 public interface TimeListener {
-        void onSuccess(long time);
-        void onError();
+    void onSuccess(long time);
+
+    void onError();
 }

@@ -13,7 +13,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by Plava tvornica on 17.7.2017..
  */
 
-public class FeedPlayer  extends RealmObject {
+public class FeedPlayer extends RealmObject {
     @PrimaryKey
     @SerializedName("Name")
     @Expose

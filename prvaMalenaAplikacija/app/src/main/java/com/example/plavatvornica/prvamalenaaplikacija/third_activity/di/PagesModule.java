@@ -19,19 +19,24 @@ public class PagesModule {
     public PagesModule(ThirdActivityContract.ThirdView view) {
         this.view = view;
     }
-    @Provides
-    @PerActivity
-    ThirdActivityContract.ThirdView provideView(){return view;}
 
     @Provides
     @PerActivity
-    ThirdActivityContract.ThirdPresenter providePresenter(ThirdPresenterImpl presenter){
+    ThirdActivityContract.ThirdView provideView() {
+        return view;
+    }
+
+    @Provides
+    @PerActivity
+    ThirdActivityContract.ThirdPresenter providePresenter(ThirdPresenterImpl presenter) {
         return presenter;
     }
+
     @Provides
     @PerActivity
-    PlayerInteractor provideInteractor(PlayerInteractorImpl interactor){return interactor;}
-
+    PlayerInteractor provideInteractor(PlayerInteractorImpl interactor) {
+        return interactor;
+    }
 
 
 }

@@ -37,7 +37,9 @@ public class HomeModule {
 
     @Provides
     @PerActivity
-    HomeContract.HomeActivityPresenter providePresenter(HomePresenterImpl homePresenter) {return homePresenter;}
+    HomeContract.HomeActivityPresenter providePresenter(HomePresenterImpl homePresenter) {
+        return homePresenter;
+    }
 
     @Provides
     @PerActivity

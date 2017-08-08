@@ -27,20 +27,20 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent ,false);
-            switch(viewType){
-                case TYPE_NAME_OF_PLAYER:
-                    return new PlayerHolder(view);
-                case TYPE_NAME_OF_TEAM:
-                    return new TeamHolder(view);
-            }
-            return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+        switch (viewType) {
+            case TYPE_NAME_OF_PLAYER:
+                return new PlayerHolder(view);
+            case TYPE_NAME_OF_TEAM:
+                return new TeamHolder(view);
+        }
+        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Wrapper_Second item =  list.get(position);
-        switch(holder.getItemViewType()){
+        Wrapper_Second item = list.get(position);
+        switch (holder.getItemViewType()) {
             case TYPE_NAME_OF_PLAYER:
                 PlayerHolder playerHolder = (PlayerHolder) holder;
                 playerHolder.cell_player.setText((String) item.getObject());
@@ -54,7 +54,9 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        { return (list == null) ? 0 : list.size();}
+        {
+            return (list == null) ? 0 : list.size();
+        }
     }
 
     public class PlayerHolder extends RecyclerView.ViewHolder {
@@ -64,12 +66,13 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
 
         public PlayerHolder(View view) {
             super(view);
-            ButterKnife.bind(this,view);
+            ButterKnife.bind(this, view);
         }
     }
 
     public class TeamHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.recycler_cell_team) TextView cell_team;
+        @BindView(R.id.recycler_cell_team)
+        TextView cell_team;
 
         public TeamHolder(View view) {
             super(view);
@@ -82,7 +85,7 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
         return list.get(position).getType();
     }
 
-    public void addData(List<Wrapper_Second> list1){
+    public void addData(List<Wrapper_Second> list1) {
         list = new ArrayList<>();
         list.clear();
         list.addAll(list1);

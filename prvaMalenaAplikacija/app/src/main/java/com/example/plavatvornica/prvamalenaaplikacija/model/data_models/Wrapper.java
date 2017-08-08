@@ -8,12 +8,10 @@ import io.realm.RealmObject;
  * Created by Plava tvornica on 20.7.2017..
  */
 
-public class Wrapper{
+public class Wrapper {
 
     public static final int TYPE_HEADER = R.layout.recycler_cell_layout_header;
     public static final int TYPE_ELEMENT = R.layout.recycler_cell_layout;
-
-
     String text;
     int type;
 
@@ -29,6 +27,4 @@ public class Wrapper{
     public int getType() {
         return type;
     }
-
-
 }

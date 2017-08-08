@@ -2,6 +2,7 @@ package com.example.plavatvornica.prvamalenaaplikacija.home_activity.di;
 
 import com.example.plavatvornica.prvamalenaaplikacija.base.scope.PerActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.view.MainActivity;
+
 import dagger.Subcomponent;
 
 /**

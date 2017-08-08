@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract;
@@ -21,11 +22,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 
-public class MainActivity extends AppCompatActivity implements HomeContract.HomeActivityView{
-    @BindView(R.id.tv_worst_crime_value) TextView tvCrime;
-    @BindView (R.id.tv_worst_player_value) TextView tvPlayer;
-    @BindView (R.id.tv_worst_team_value) TextView tvTeam;
-    DatabaseHandle databaseHandle;
+public class MainActivity extends AppCompatActivity implements HomeContract.HomeActivityView {
+    @BindView(R.id.tv_worst_crime_value)
+    TextView tvCrime;
+    @BindView(R.id.tv_worst_player_value)
+    TextView tvPlayer;
+    @BindView(R.id.tv_worst_team_value)
+    TextView tvTeam;
+
     @Inject
     HomeContract.HomeActivityPresenter presenter;
 
@@ -35,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements HomeContract.Home
         setContentView(R.layout.layout);
         MyApplication.appComponent.plus(new HomeModule(this)).inject(this);
         ButterKnife.bind(this);
-
     }
 
     @Override
@@ -56,23 +59,23 @@ public class MainActivity extends AppCompatActivity implements HomeContract.Home
 
     @OnClick(R.id.bCrime)
     public void openActivity(View view) {
-       presenter.getNameTeam();
+        presenter.getNameTeam();
     }
 
     @OnClick(R.id.bPlayer)
     public void openActivity1(View view) {
-       presenter.getNamePlayer();
+        presenter.getNamePlayer();
     }
 
 
     @OnClick(R.id.btn_third_act)
-    public void openActivity2(View view){
+    public void openActivity2(View view) {
         Intent intent = new Intent(this, ThirdActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.btn_time_act1)
-    public void openTimeActivity(View view){
+    public void openTimeActivity(View view) {
         Intent intent = new Intent(this, TimeActivity.class);
         startActivity(intent);
     }
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements HomeContract.Home
         tvTeam.setText(team);
     }
 
-//imolemenatcija funkcije u interface-u
+    //imolemenatcija funkcije u interface-u
     @Override
     public void setupWorstCrime(String crime) {
         tvCrime.setText(crime);
@@ -110,6 +113,5 @@ public class MainActivity extends AppCompatActivity implements HomeContract.Home
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // databaseHandle.destroyRealm();
     }
 }

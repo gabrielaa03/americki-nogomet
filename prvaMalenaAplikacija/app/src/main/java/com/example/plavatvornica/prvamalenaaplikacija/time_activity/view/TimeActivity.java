@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TimeActivity extends AppCompatActivity implements TimeContract.TimeView{
+public class TimeActivity extends AppCompatActivity implements TimeContract.TimeView {
 
     @BindView(R.id.tv_time)
     TextView tv;

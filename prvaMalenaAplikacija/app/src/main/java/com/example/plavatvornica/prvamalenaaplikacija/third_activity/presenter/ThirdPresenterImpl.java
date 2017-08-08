@@ -34,12 +34,11 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
     public void onSuccess1(String start, String end, int pagePosition, List<FeedPlayer> list) {
         List<Wrapper_Second> lCrimeOverYear = new ArrayList<>();
         assert list != null;
-        for(int i = 0; i<list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             lCrimeOverYear.add(new Wrapper_Second(list.get(i).getTeam(), Wrapper_Second.TYPE_NAME_OF_TEAM));
             lCrimeOverYear.add(new Wrapper_Second(list.get(i).getName(), Wrapper_Second.TYPE_NAME_OF_PLAYER));
         }
         view.sendListOfCrimesOverYear(lCrimeOverYear, pagePosition);
-
     }
 
     @Override

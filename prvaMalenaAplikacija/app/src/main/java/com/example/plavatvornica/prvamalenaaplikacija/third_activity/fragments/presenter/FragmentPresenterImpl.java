@@ -11,9 +11,9 @@ public class FragmentPresenterImpl implements FragmentContract.FragmentPresenter
 
     String start_date, end_date;
 
-    public void findFragment (int position, final FragmentContract.FragmentView listener){
+    public void findFragment(int position, final FragmentContract.FragmentView listener) {
 
-        switch(position){
+        switch (position) {
 
             case 0:
                 start_date = "2010-01-01";

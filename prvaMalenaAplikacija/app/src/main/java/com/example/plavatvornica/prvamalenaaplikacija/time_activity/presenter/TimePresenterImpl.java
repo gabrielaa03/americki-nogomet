@@ -23,9 +23,10 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Plava tvornica on 27.7.2017..
  */
 
-public class TimePresenterImpl implements TimeContract.TimePresenter{
+public class TimePresenterImpl implements TimeContract.TimePresenter {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private TimeContract.TimeView view;
+
     @Inject
     public TimePresenterImpl(TimeContract.TimeView view) {
         this.view = view;

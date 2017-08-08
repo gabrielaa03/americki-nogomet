@@ -15,7 +15,7 @@ import io.reactivex.Observable;
  * Created by Plava tvornica on 31.7.2017..
  */
 
-public interface HomeInteractor extends BaseInteractor{
+public interface HomeInteractor extends BaseInteractor {
 
     void getAll(HomeListener listener);
 

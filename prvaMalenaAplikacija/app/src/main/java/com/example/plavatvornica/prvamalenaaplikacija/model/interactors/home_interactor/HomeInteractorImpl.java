@@ -1,9 +1,11 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor;
 
+import com.example.plavatvornica.prvamalenaaplikacija.base.SharedRepo;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.HomeContainer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractorImpl;
@@ -28,37 +30,53 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Plava tvornica on 31.7.2017..
  */
 
-public class HomeInteractorImpl extends BaseInteractorImpl implements HomeInteractor{
+public class HomeInteractorImpl extends BaseInteractorImpl implements HomeInteractor {
 
     private CrimeInteractor crimeInteractor;
     private PlayerInteractor playerInteractor;
     private TeamInteractor teamInteractor;
+    private SharedRepo repo;
 
     @Inject
-    public HomeInteractorImpl(CrimeInteractor crimeInteractor, PlayerInteractor playerInteractor, TeamInteractor teamInteractor) {
+    public HomeInteractorImpl(CrimeInteractor crimeInteractor, PlayerInteractor playerInteractor, TeamInteractor teamInteractor, SharedRepo repo) {
         this.crimeInteractor = crimeInteractor;
         this.playerInteractor = playerInteractor;
         this.teamInteractor = teamInteractor;
+        this.repo = repo;
     }
 
     public void getAll(final HomeListener listener) {
-        addObserver(Observable.zip(crimeInteractor.getAllCrimesObservable(), teamInteractor.getAllTeamsObservable(), playerInteractor.getAllPlayersObservable(), new Function3<List<FeedCrime>, List<FeedTeam>, List<FeedPlayer>, HomeContainer>() {
-            @Override
-            public HomeContainer apply(@NonNull List<FeedCrime> feedCrimes, @NonNull List<FeedTeam> feedTeams, @NonNull List<FeedPlayer> feedPlayers) throws Exception {
-                return new HomeContainer(feedPlayers, feedCrimes, feedTeams);
-            }}).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<HomeContainer>() {
-            @Override
-            public void onNext(HomeContainer homeContainer) {
-                listener.onSuccess(homeContainer);
-            }
+        long currentTime = System.currentTimeMillis();
+        long readTime = repo.getSavedTimeHome();
+        long myTime = currentTime - readTime;
 
-            @Override
-            public void onError(Throwable e) {listener.onError();}
+        if (myTime < 300000) {
+            listener.onSuccess(new HomeContainer(DatabaseHandle.getFeedPlayer(), DatabaseHandle.getFeedCrime(), DatabaseHandle.getFeedTeam()));
+        } else {
+            addObserver(Observable.zip(crimeInteractor.getAllCrimesObservable(), teamInteractor.getAllTeamsObservable(), playerInteractor.getAllPlayersObservable(), new Function3<List<FeedCrime>, List<FeedTeam>, List<FeedPlayer>, HomeContainer>() {
+                @Override
+                public HomeContainer apply(@NonNull List<FeedCrime> feedCrimes, @NonNull List<FeedTeam> feedTeams, @NonNull List<FeedPlayer> feedPlayers) throws Exception {
+                    DatabaseHandle.saveFeedCrimes(feedCrimes);
+                    DatabaseHandle.saveFeedPlayer(feedPlayers);
+                    DatabaseHandle.saveFeedTeam(feedTeams);
+                    repo.setSavedTimeHome(System.currentTimeMillis());
+                    return (new HomeContainer(feedPlayers, feedCrimes, feedTeams));
+                }
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<HomeContainer>() {
+                @Override
+                public void onNext(HomeContainer homeContainer) {
+                    listener.onSuccess(homeContainer);
+                }
 
-            @Override
-            public void onComplete() {
+                @Override
+                public void onError(Throwable e) {
+                    listener.onError();
+                }
 
-            }
-        }));
+                @Override
+                public void onComplete() {
+                }
+            }));
+        }
     }
 }

@@ -12,7 +12,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class FeedCrime extends RealmObject {
     @PrimaryKey
-    @SerializedName("Category")
+     @SerializedName("Category")
     @Expose
     private String category;
     @SerializedName("arrest_count")
@@ -22,6 +22,14 @@ public class FeedCrime extends RealmObject {
     @SerializedName("category")
     @Expose
     private String category1;
+
+  /*  public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }*/
 
     public String getCategory() {
         return category;
@@ -46,5 +54,4 @@ public class FeedCrime extends RealmObject {
     public void setArrestCount(String arrestCount) {
         this.arrestCount = arrestCount;
     }
-
 }

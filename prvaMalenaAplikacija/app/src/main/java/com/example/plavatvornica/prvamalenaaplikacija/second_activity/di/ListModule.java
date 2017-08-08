@@ -1,5 +1,8 @@
 package com.example.plavatvornica.prvamalenaaplikacija.second_activity.di;
 
+import android.content.SharedPreferences;
+
+import com.example.plavatvornica.prvamalenaaplikacija.base.SharedRepo;
 import com.example.plavatvornica.prvamalenaaplikacija.base.scope.PerActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractorImpl;
@@ -17,7 +20,7 @@ import dagger.Provides;
 @Module
 public class ListModule {
 
-    SecondActivityContract.SecondActivityView view ;
+    SecondActivityContract.SecondActivityView view;
 
     public ListModule(SecondActivityContract.SecondActivityView view) {
         this.view = view;
@@ -25,17 +28,20 @@ public class ListModule {
 
     @Provides
     @PerActivity
-    SecondActivityContract.SecondActivityView provideView(){
+    SecondActivityContract.SecondActivityView provideView() {
         return view;
     }
 
     @Provides
     @PerActivity
-    SecondActivityContract.ListPresenter providesPresenter(ListPresenterImpl presenter){return presenter;}
-
+    SecondActivityContract.ListPresenter providesPresenter(ListPresenterImpl presenter) {
+        return presenter;
+    }
 
     @Provides
     @PerActivity
-    CrimeInteractor providesInteractor(CrimeInteractorImpl crimeInteractor){return crimeInteractor;}
+    CrimeInteractor providesInteractor(CrimeInteractorImpl crimeInteractor) {
+        return crimeInteractor;
+    }
 
 }

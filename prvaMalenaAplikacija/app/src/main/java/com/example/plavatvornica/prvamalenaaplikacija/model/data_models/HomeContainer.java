@@ -28,5 +28,7 @@ public class HomeContainer {
         return crime;
     }
 
-    public List<FeedTeam> getTeam() {return team;}
+    public List<FeedTeam> getTeam() {
+        return team;
+    }
 }

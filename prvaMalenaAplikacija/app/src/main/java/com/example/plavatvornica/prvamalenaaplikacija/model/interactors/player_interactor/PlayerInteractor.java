@@ -13,9 +13,12 @@ import io.reactivex.Observable;
  */
 
 public interface PlayerInteractor extends BaseInteractor {
-        void getAllPlayers(PlayerListener listener);
-        void getCrimesOverYear(String start, String end, final int pagePosition, PlayerListener listener);
-        Observable<List<FeedPlayer>> getCrimesOverYearObservable(String start, String end);
-        Observable<List<FeedPlayer>> getAllPlayersObservable();
+    void getAllPlayers(PlayerListener listener);
+
+    void getCrimesOverYear(String start, String end, final int pagePosition, PlayerListener listener);
+
+    Observable<List<FeedPlayer>> getCrimesOverYearObservable(String start, String end);
+
+    Observable<List<FeedPlayer>> getAllPlayersObservable();
 
 }

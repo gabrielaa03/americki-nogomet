@@ -6,7 +6,7 @@ import android.view.animation.BaseInterpolator;
  * Created by Plava tvornica on 27.7.2017..
  */
 
-public interface BaseInteractor{
+public interface BaseInteractor {
 
     void disposeComp();
 

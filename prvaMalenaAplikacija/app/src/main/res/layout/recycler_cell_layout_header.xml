@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/siva"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/siva">
 
-        <TextView
-            android:id="@+id/tv_recycler_cell1"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:padding="15dp"
-            android:textAlignment="textStart"
-            tools:text = "gfdgdssgf"/>
+    <TextView
+        android:id="@+id/tv_recycler_cell1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:padding="15dp"
+        android:textAlignment="textStart"
+        tools:text="gfdgdssgf" />
 
-        <TextView
-            android:id="@+id/tv_recycler_cell_count"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:padding="15dp"
-            android:layout_toEndOf="@+id/tv_recycler_cell1"
-            android:layout_alignParentEnd="true"
-            android:textAlignment="textEnd"
-            tools:text = "dfs"/>
+    <TextView
+        android:id="@+id/tv_recycler_cell_count"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/tv_recycler_cell1"
+        android:padding="15dp"
+        android:textAlignment="textEnd"
+        tools:text="dfs" />
 
 
 </RelativeLayout>

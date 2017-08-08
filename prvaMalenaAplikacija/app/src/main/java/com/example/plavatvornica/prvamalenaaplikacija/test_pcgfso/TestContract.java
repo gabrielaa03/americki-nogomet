@@ -13,6 +13,7 @@ public interface TestContract {
     interface Presenter {
         // inače se stavi uvijek BasePresenter koji sadrži ove dvije metode i svaki drugi presenter samo nasljeđuje ove osnovne metode start i stop, zato što se u njima odvija dohvaćanje podataka
         void onStart();
+
         void onStop();
     }
 }

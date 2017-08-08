@@ -1,6 +1,7 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor;
 
 import com.example.plavatvornica.prvamalenaaplikacija.base.RestInterface;
+import com.example.plavatvornica.prvamalenaaplikacija.base.SharedRepo;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
@@ -26,38 +27,42 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class TeamInteractorImpl extends BaseInteractorImpl implements TeamInteractor {
-    private long lastResponseTime;
     private RestInterface restInterface;
+    private SharedRepo repo;
 
     @Inject
-    public TeamInteractorImpl(RestInterface restInterface) {
+    public TeamInteractorImpl(RestInterface restInterface, SharedRepo repo) {
         this.restInterface = restInterface;
+        this.repo = repo;
     }
 
     @Override
-    public void getAllTeams(final TeamListener listener1) {
+    public void getAllTeams(final TeamListener listener) {
         long currentTime = System.currentTimeMillis();
-        long myTime = currentTime - lastResponseTime;
-        List<FeedTeam> feedTeamRealmResponse = DatabaseHandle.getFeedTeam();
+        long readTime = repo.getSavedTimeAllTeams();
+        long myTime = currentTime - readTime;
 
-        if(myTime > 300000 || feedTeamRealmResponse==null ) {
+        if (myTime < 300000) {
+            listener.onSuccess(DatabaseHandle.getFeedTeam());
+        } else {
             addObserver(getAllTeamsObservable().subscribeOn(Schedulers.io()).flatMap(new Function<List<FeedTeam>, ObservableSource<List<FeedTeam>>>() {
                 @Override
                 public ObservableSource<List<FeedTeam>> apply(@NonNull List<FeedTeam> feedTeams) throws Exception {
                     DatabaseHandle.saveFeedTeam(feedTeams);
+                    repo.setSavedTimeAllTeams(System.currentTimeMillis());
                     return Observable.just(feedTeams);
                 }
             }).observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new DisposableObserver<List<FeedTeam>>() {
                         @Override
                         public void onNext(List<FeedTeam> feedTeams) {
-                            listener1.onSuccess(feedTeams);
+                            listener.onSuccess(feedTeams);
 
                         }
 
                         @Override
                         public void onError(Throwable e) {
-                            listener1.onError();
+                            listener.onError();
                         }
 
                         @Override
@@ -65,8 +70,7 @@ public class TeamInteractorImpl extends BaseInteractorImpl implements TeamIntera
                         }
                     }));
         }
-        lastResponseTime = System.currentTimeMillis();
-       }
+    }
 
     @Override
     public Observable<List<FeedTeam>> getAllTeamsObservable() {

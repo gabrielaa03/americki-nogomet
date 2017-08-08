@@ -6,5 +6,6 @@ package com.example.plavatvornica.prvamalenaaplikacija.model_test.interactors.te
 
 public interface TestListener {
     void onSuccess(String string);
+
     void onError(String error);
 }

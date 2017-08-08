@@ -24,8 +24,7 @@ import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.W
  */
 
 
-
-public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     ArrayList<Wrapper> recList = new ArrayList<>();
     SecondActivityContract.SecondActivityView clickListener;
     String text;
@@ -41,11 +40,12 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         }
         return null;
     }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Wrapper item = recList.get(position);
 
-        switch(holder.getItemViewType()){
+        switch (holder.getItemViewType()) {
             case TYPE_ELEMENT:
                 ItemHolder itemHolder = (ItemHolder) holder;
                 itemHolder.cell.setText(item.getText());
@@ -56,13 +56,15 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 break;
         }
     }
+
     @Override
     public int getItemCount() {
         return (recList == null) ? 0 : recList.size();
     }
 
     public class HeaderHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_recycler_cell1)TextView cell1;
+        @BindView(R.id.tv_recycler_cell1)
+        TextView cell1;
 
 
         public HeaderHolder(View itemView) {
@@ -91,12 +93,13 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             if (clickListener != null) clickListener.onClick(v, text);
         }
     }
+
     @Override
     public int getItemViewType(int position) {
         return recList.get(position).getType();
     }
 
-    public void addDataIntoRecycler(List<Wrapper> list){
+    public void addDataIntoRecycler(List<Wrapper> list) {
         recList.clear();
         recList.addAll(list);
         notifyDataSetChanged();

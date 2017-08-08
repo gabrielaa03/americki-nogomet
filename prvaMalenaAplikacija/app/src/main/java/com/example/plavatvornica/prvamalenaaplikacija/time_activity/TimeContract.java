@@ -5,11 +5,13 @@ package com.example.plavatvornica.prvamalenaaplikacija.time_activity;
  */
 
 public interface TimeContract {
-    interface TimeView{
+    interface TimeView {
         void sendTimeData(String time);
     }
-    interface TimePresenter{
+
+    interface TimePresenter {
         void onStart();
+
         void onStop();
 
     }

@@ -8,5 +8,6 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.HomeCont
 
 public interface HomeListener {
     void onSuccess(HomeContainer homeContainer);
+
     void onError();
 }

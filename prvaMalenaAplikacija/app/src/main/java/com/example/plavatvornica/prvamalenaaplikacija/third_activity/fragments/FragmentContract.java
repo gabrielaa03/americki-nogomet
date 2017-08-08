@@ -10,7 +10,7 @@ public interface FragmentContract {
         void sendDate(String start_date, String end_date, int pagePosition);
     }
 
-    interface FragmentPresenter{
+    interface FragmentPresenter {
 
     }
 }

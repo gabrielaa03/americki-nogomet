@@ -26,6 +26,7 @@ public class Wrapper_Second implements Parcelable {
     public int getType() {
         return type;
     }
+
     public Object getObject() {
         return object;
     }

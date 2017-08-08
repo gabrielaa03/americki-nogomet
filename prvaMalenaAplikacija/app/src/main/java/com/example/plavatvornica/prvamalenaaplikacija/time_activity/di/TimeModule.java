@@ -21,8 +21,13 @@ public class TimeModule {
 
     @Provides
     @PerActivity
-    TimeContract.TimeView provideView(){return view;}
+    TimeContract.TimeView provideView() {
+        return view;
+    }
+
     @Provides
     @PerActivity
-    TimeContract.TimePresenter presenter(TimePresenterImpl presenter){return presenter;}
+    TimeContract.TimePresenter presenter(TimePresenterImpl presenter) {
+        return presenter;
+    }
 }

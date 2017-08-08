@@ -35,12 +35,11 @@ import io.realm.Realm;
 
 //obrađivanje podataka
 
-public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,HomeListener{
+public class HomePresenterImpl implements HomeContract.HomeActivityPresenter, HomeListener {
 
     private HomeContract.HomeActivityView view;
     private HomeInteractor homeInteractor;
     private String player, team, crime;
-    DatabaseHandle databaseHandle = new DatabaseHandle();
 
     @Inject
     public HomePresenterImpl(HomeContract.HomeActivityView view, HomeInteractor homeInteractor) {
@@ -105,18 +104,18 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter,Hom
         int count2 = 0;
         int c2;
         player = "";
-            for (int i = 0; i < listPlayer.size(); i++) {
+        for (int i = 0; i < listPlayer.size(); i++) {
             c2 = Integer.parseInt(listPlayer.get(i).getArrestCount());
             if (c2 > count2) {
                 count2 = c2;
                 player = listPlayer.get(i).getName();
             }
         }
-            view.setupWorstPlayer(player);
-}
+        view.setupWorstPlayer(player);
+    }
 
     @Override
     public void onError() {
-        Log.d("error","error");
+        Log.d("error", "error");
     }
 }

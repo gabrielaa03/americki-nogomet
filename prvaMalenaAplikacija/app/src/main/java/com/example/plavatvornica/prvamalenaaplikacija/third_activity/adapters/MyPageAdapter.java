@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class MyPageAdapter extends FragmentStatePagerAdapter {
-        private String [] namesOfPages= {"2010", "2011", "2012", "2013"};
+    private String[] namesOfPages = {"2010", "2011", "2012", "2013"};
 
     //promjeniti sam na jedan fragment i proslijediti position
     //u presenteru od fragmenta napraviti switch case koji prema position salje year

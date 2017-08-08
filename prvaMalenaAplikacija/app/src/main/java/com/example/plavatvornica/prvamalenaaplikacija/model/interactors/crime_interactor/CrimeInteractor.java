@@ -1,5 +1,8 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
@@ -14,8 +17,11 @@ import io.reactivex.Observable;
 
 public interface CrimeInteractor extends BaseInteractor {
     void getAllCrimes(CrimeListener listener);
+
     void getPlayersCrimes(String playerName, CrimeListener listener);
+
     Observable<List<FeedCrime>> getAllCrimesObservable();
+
     Observable<List<FeedCrime>> getPlayersCrimesObservable(String playerName);
 
 }

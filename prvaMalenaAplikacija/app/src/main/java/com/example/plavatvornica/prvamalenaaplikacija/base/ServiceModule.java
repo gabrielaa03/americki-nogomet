@@ -17,37 +17,37 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceModule {
     private String URL = "http://nflarrest.com/api/v1/";
 
-    public ServiceModule( ) {
+    public ServiceModule() {
 
     }
 
     @Singleton
     @Provides
-    OkHttpClient provideOkHttpClient(){
+    OkHttpClient provideOkHttpClient() {
         return new OkHttpClient.Builder().build();
     }
 
     @Singleton
     @Provides
-    RxJava2CallAdapterFactory provideRxJava2CallAdapterFactory(){
+    RxJava2CallAdapterFactory provideRxJava2CallAdapterFactory() {
         return RxJava2CallAdapterFactory.create();
     }
 
     @Singleton
     @Provides
-    GsonConverterFactory provideGsonConverterFactory(){
+    GsonConverterFactory provideGsonConverterFactory() {
         return GsonConverterFactory.create();
     }
 
     @Singleton
     @Provides
     Retrofit provideRetrofit(OkHttpClient client, GsonConverterFactory converterFactory, RxJava2CallAdapterFactory adapterFactory) {
-                return new Retrofit.Builder()
-                        .baseUrl(URL)
-                        .client(client)
-                        .addConverterFactory(converterFactory)
-                        .addCallAdapterFactory(adapterFactory)
-                        .build();
+        return new Retrofit.Builder()
+                .baseUrl(URL)
+                .client(client)
+                .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(adapterFactory)
+                .build();
     }
 
     @Singleton

@@ -1,5 +1,7 @@
 package com.example.plavatvornica.prvamalenaaplikacija.second_activity.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondActivityContract;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.di.ListModule;
 import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenterImpl;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,15 +25,18 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SecondActivity extends AppCompatActivity implements SecondActivityContract.SecondActivityView{
+public class SecondActivity extends AppCompatActivity implements SecondActivityContract.SecondActivityView {
 
     public static final String EXTRA_PLAYER_NAME = "EXTRA_PLAYER";
     public static final String EXTRA_TEAM_NAME = "EXTRA_TEAM";
 
     private RecAdapter recAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.tv_name) TextView tvName;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    @BindView(R.id.tv_name)
+    TextView tvName;
+    SharedPreferences sharedPref;
     String teamName, playerName;
 
     @Inject
@@ -51,10 +57,7 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
 
         playerName = getIntent().getStringExtra(EXTRA_PLAYER_NAME);
         teamName = getIntent().getStringExtra(EXTRA_TEAM_NAME);
-
-        presenter.initialize(playerName, teamName);
         tvName.setText(playerName);
-
     }
 
     @Override
@@ -70,7 +73,10 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     }
 
     @Override
-    public void sendPlayersCrimes(List<Wrapper> list) { recAdapter.addDataIntoRecycler(list); }
+    public void sendPlayersCrimes(List<Wrapper> list) {
+        recAdapter.addDataIntoRecycler(list);
+    }
+
     @Override
     public void sendSortedCrimes(List<Wrapper> list) {
         recAdapter.addDataIntoRecycler(list);

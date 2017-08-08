@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
@@ -16,6 +17,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.F
 import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.presenter.FragmentPresenterImpl;
 
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -48,7 +50,7 @@ public class FirstFragment extends Fragment implements FragmentContract.Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       pos = getArguments() != null ? getArguments().getInt("position") : 1 ;
+        pos = getArguments() != null ? getArguments().getInt("position") : 1;
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -85,12 +87,11 @@ public class FirstFragment extends Fragment implements FragmentContract.Fragment
     @Override
     public void sendDate(String start_date, String end_date, int pagePosition) {
         listener.sendDataToActivity(start_date, end_date, pagePosition);
-     }
-
-    public void addListToAdapter(List<Wrapper_Second> list){
-        adapter.addData(list);
     }
 
+    public void addListToAdapter(List<Wrapper_Second> list) {
+        adapter.addData(list);
+    }
 
 
 }
