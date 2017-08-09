@@ -3,12 +3,14 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.database;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.WrapperCrimesOverYeaer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.WrapperFeedCrime;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -47,7 +49,7 @@ public class DatabaseHandle {
         });
     }
 
-    public static void saveFeedCrimesOverYear(final List<FeedPlayer> listPlayer) {
+    public static void saveFeedCrimesOverYear(final List<WrapperCrimesOverYeaer> listPlayer) {
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -94,6 +96,11 @@ public class DatabaseHandle {
 
     public static List<FeedPlayer> getFeedCrimesOverYear() {
         Realm realm = Realm.getDefaultInstance();
-        return realm.copyFromRealm(realm.where(FeedPlayer.class).findAll());
+        List<FeedPlayer> list = new ArrayList<>();
+        RealmResults<WrapperCrimesOverYeaer> wrapperCrimesOverYeaers = realm.where(WrapperCrimesOverYeaer.class).findAll();
+        for(WrapperCrimesOverYeaer wrapperCrimesOverYeaer : wrapperCrimesOverYeaers){
+            list.add(wrapperCrimesOverYeaer.getFeedPlayer());
+        }
+        return list;
     }
 }

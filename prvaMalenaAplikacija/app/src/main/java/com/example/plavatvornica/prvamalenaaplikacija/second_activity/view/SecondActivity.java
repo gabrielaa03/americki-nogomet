@@ -36,7 +36,6 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     RecyclerView recyclerView;
     @BindView(R.id.tv_name)
     TextView tvName;
-    SharedPreferences sharedPref;
     String teamName, playerName;
 
     @Inject

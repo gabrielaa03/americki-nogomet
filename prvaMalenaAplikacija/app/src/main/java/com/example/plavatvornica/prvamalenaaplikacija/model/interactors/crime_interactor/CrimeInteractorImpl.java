@@ -80,13 +80,12 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
         long myTime = currentTime - readTime;
 
         if (myTime < 300000) {
-
             listener.onSuccess(DatabaseHandle.getFeedPlayersCrimes(), 2);
         } else {
             addObserver(getPlayersCrimesObservable(playerName).subscribeOn(Schedulers.io()).flatMap(new Function<List<FeedCrime>, ObservableSource<List<FeedCrime>>>() {
                 @Override
                 public ObservableSource<List<FeedCrime>> apply(@NonNull List<FeedCrime> feedCrimes) throws Exception {
-                    List<WrapperFeedCrime> list = new ArrayList<WrapperFeedCrime>();
+                    List<WrapperFeedCrime> list = new ArrayList<>();
                     for(FeedCrime feedCrime : feedCrimes){
                         list.add(new WrapperFeedCrime(feedCrime));
                     }

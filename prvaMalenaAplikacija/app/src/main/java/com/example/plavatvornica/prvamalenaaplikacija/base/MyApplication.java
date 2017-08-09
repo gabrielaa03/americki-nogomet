@@ -24,8 +24,4 @@ public class MyApplication extends Application {
                 .build();
     }
 
-    public static Realm getRealmInstance() {
-        return Realm.getDefaultInstance();
-    }
-
 }

@@ -40,7 +40,7 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
     @Override
     public void onSuccess(List<FeedCrime> list, int type) {
         if (type == 1) {
-            List<String> listOfAllCrimes = new ArrayList<String>();
+            List<String> listOfAllCrimes = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
                 listOfAllCrimes.add(list.get(i).getCategory());
             }

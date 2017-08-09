@@ -2,11 +2,15 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_
 
 import com.example.plavatvornica.prvamalenaaplikacija.base.RestInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.base.SharedRepo;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.WrapperCrimesOverYeaer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.WrapperFeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.listeners.PlayerListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -80,7 +84,11 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
             addObserver(getCrimesOverYearObservable(start, end).subscribeOn(Schedulers.io()).flatMap(new Function<List<FeedPlayer>, ObservableSource<List<FeedPlayer>>>() {
                 @Override
                 public ObservableSource<List<FeedPlayer>> apply(@NonNull List<FeedPlayer> feedPlayers) throws Exception {
-                    DatabaseHandle.saveFeedCrimesOverYear(feedPlayers);
+                    List<WrapperCrimesOverYeaer> list = new ArrayList<>();
+                    for(FeedPlayer feedPlayer : feedPlayers){
+                        list.add(new WrapperCrimesOverYeaer(feedPlayer));
+                    }
+                    DatabaseHandle.saveFeedCrimesOverYear(list);
                     repo.setSavedTimeCrimesOverYear(System.currentTimeMillis());
                     return Observable.just(feedPlayers);
                 }
@@ -103,7 +111,6 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
                     }));
         }
     }
-
 
     public Observable<List<FeedPlayer>> getCrimesOverYearObservable(String start, String end) {
         return restInterface.listOfCrimesOverYear(start, end);
