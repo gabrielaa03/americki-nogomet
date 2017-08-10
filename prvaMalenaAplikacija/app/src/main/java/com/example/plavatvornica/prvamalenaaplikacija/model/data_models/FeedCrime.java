@@ -11,7 +11,7 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class FeedCrime extends RealmObject {
-    @PrimaryKey
+
     @SerializedName("Category")
     @Expose
     private String category;
