@@ -2,10 +2,10 @@ package com.example.plavatvornica.prvamalenaaplikacija.base;
 
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.di.HomeComponent;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.di.HomeModule;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.di.ListComponent;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.di.ListModule;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.di.PagerComponent;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.di.PagesModule;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.di.ListComponent;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.di.ListModule;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.di.PagerComponent;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.di.PagesModule;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.di.TimeComponent;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.di.TimeModule;
 

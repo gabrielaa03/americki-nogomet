@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.adapter;
+package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +23,7 @@ import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.W
  */
 
 public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    ArrayList<Wrapper_Second> list = new ArrayList<>();
+    private ArrayList<Wrapper_Second> list = new ArrayList<>();
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

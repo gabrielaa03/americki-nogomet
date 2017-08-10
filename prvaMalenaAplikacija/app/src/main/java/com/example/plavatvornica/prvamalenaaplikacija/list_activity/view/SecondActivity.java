@@ -1,7 +1,5 @@
-package com.example.plavatvornica.prvamalenaaplikacija.second_activity.view;
+package com.example.plavatvornica.prvamalenaaplikacija.list_activity.view;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,10 +11,9 @@ import android.widget.Toast;
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.RecAdapter;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondActivityContract;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.di.ListModule;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenterImpl;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.RecAdapter;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.SecondActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.di.ListModule;
 
 import java.util.List;
 
@@ -35,8 +32,8 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.tv_name)
-    TextView tvName;
-    String teamName, playerName;
+    private TextView tvName;
+    private String teamName, playerName;
 
     @Inject
     SecondActivityContract.ListPresenter presenter;

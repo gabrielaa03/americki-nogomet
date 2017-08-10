@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments;
+package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments;
 
 /**
  * Created by Plava tvornica on 27.7.2017..
@@ -11,6 +11,5 @@ public interface FragmentContract {
     }
 
     interface FragmentPresenter {
-
     }
 }

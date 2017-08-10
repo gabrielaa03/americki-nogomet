@@ -19,8 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".second_activity.view.SecondActivity" />
-        <activity android:name=".third_activity.view.ThirdActivity" />
+        <activity android:name=".list_activity.view.SecondActivity" />
+        <activity android:name=".list_of_criminals_activity.view.ListOfCriminalsOverYear" />
         <activity android:name=".time_activity.view.TimeActivity"></activity>
     </application>
 

@@ -1,14 +1,10 @@
-package com.example.plavatvornica.prvamalenaaplikacija.second_activity.di;
+package com.example.plavatvornica.prvamalenaaplikacija.list_activity.di;
 
-import android.content.SharedPreferences;
-
-import com.example.plavatvornica.prvamalenaaplikacija.base.SharedRepo;
 import com.example.plavatvornica.prvamalenaaplikacija.base.scope.PerActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractorImpl;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor.HomeInteractor;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondActivityContract;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter.ListPresenterImpl;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.SecondActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.presenter.ListPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;

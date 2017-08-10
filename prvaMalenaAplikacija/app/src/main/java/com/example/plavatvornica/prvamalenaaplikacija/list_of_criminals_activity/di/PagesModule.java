@@ -1,10 +1,10 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.di;
+package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.di;
 
 import com.example.plavatvornica.prvamalenaaplikacija.base.scope.PerActivity;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractorImpl;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter.ThirdPresenterImpl;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.ListOfCriminalsContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.presenter.ListOfCriminalsOverYearImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,21 +14,21 @@ import dagger.Provides;
  */
 @Module
 public class PagesModule {
-    private ThirdActivityContract.ThirdView view;
+    private ListOfCriminalsContract.ThirdView view;
 
-    public PagesModule(ThirdActivityContract.ThirdView view) {
+    public PagesModule(ListOfCriminalsContract.ThirdView view) {
         this.view = view;
     }
 
     @Provides
     @PerActivity
-    ThirdActivityContract.ThirdView provideView() {
+    ListOfCriminalsContract.ThirdView provideView() {
         return view;
     }
 
     @Provides
     @PerActivity
-    ThirdActivityContract.ThirdPresenter providePresenter(ThirdPresenterImpl presenter) {
+    ListOfCriminalsContract.ThirdPresenter providePresenter(ListOfCriminalsOverYearImpl presenter) {
         return presenter;
     }
 
@@ -37,6 +37,4 @@ public class PagesModule {
     PlayerInteractor provideInteractor(PlayerInteractorImpl interactor) {
         return interactor;
     }
-
-
 }

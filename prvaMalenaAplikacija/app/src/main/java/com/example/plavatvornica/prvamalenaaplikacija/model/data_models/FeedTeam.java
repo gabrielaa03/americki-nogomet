@@ -49,9 +49,7 @@ public class FeedTeam extends RealmObject {
         return teamPrefferedName;
     }
 
-    public void setTeamPrefferedName(String teamPrefferedName) {
-        this.teamPrefferedName = teamPrefferedName;
-    }
+    public void setTeamPrefferedName(String teamPrefferedName) { this.teamPrefferedName = teamPrefferedName; }
 
     public String getTeamName() {
         return teamName;
@@ -81,9 +79,7 @@ public class FeedTeam extends RealmObject {
         return teamConferenceDivision;
     }
 
-    public void setTeamConferenceDivision(String teamConferenceDivision) {
-        this.teamConferenceDivision = teamConferenceDivision;
-    }
+    public void setTeamConferenceDivision(String teamConferenceDivision) { this.teamConferenceDivision = teamConferenceDivision; }
 
     public String getTeamLogoId() {
         return teamLogoId;

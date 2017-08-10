@@ -1,13 +1,12 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.presenter;
+package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.presenter;
 
 import android.util.Log;
 
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractor;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.listeners.PlayerListener;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.ListOfCriminalsContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +18,13 @@ import javax.inject.Inject;
  * Created by Plava tvornica on 20.7.2017..
  */
 
-public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter, PlayerListener {
+public class ListOfCriminalsOverYearImpl implements ListOfCriminalsContract.ThirdPresenter, PlayerListener {
 
-    private ThirdActivityContract.ThirdView view;
+    private ListOfCriminalsContract.ThirdView view;
     private PlayerInteractor interactor;
 
     @Inject
-    public ThirdPresenterImpl(ThirdActivityContract.ThirdView view, PlayerInteractor interactor) {
+    public ListOfCriminalsOverYearImpl(ListOfCriminalsContract.ThirdView view, PlayerInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
     }
@@ -60,7 +59,5 @@ public class ThirdPresenterImpl implements ThirdActivityContract.ThirdPresenter,
     }
 
     @Override
-    public void getData(String start, String end, int pos) {
-        interactor.getCrimesOverYear(start, end, pos, this);
-    }
+    public void getData(String start, String end, int pos) { interactor.getCrimesOverYear(start, end, pos, this); }
 }

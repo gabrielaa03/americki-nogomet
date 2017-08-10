@@ -15,8 +15,8 @@ public class Wrapper_Second implements Parcelable {
     public static final int TYPE_NAME_OF_TEAM = R.layout.recycler_layout_team;
 
 
-    Object object;
-    int type;
+    private Object object;
+    private int type;
 
     public Wrapper_Second(Object object, int type) {
         this.object = object;

@@ -18,7 +18,5 @@ public class WrapperCrimesOverYeaer implements RealmModel {
         return feedPlayer;
     }
 
-    public void setFeedPlayer(FeedPlayer feedPlayer) {
-        this.feedPlayer = feedPlayer;
-    }
+    public void setFeedPlayer(FeedPlayer feedPlayer) { this.feedPlayer = feedPlayer; }
 }

@@ -1,6 +1,5 @@
 package com.example.plavatvornica.prvamalenaaplikacija.home_activity.presenter;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract;
@@ -8,26 +7,12 @@ import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrim
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.HomeContainer;
-import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractorImpl;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor.HomeInteractor;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor.HomeInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.home_interactor.Listener.HomeListener;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractor;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractorImpl;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.listeners.PlayerListener;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor.TeamInteractor;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor.TeamInteractorImpl;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.team_interactor.listeners.TeamListener;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import dagger.Provides;
-import io.realm.Realm;
 
 /**
  * Created by Plava tvornica on 17.7.2017..
@@ -54,18 +39,17 @@ public class HomePresenterImpl implements HomeContract.HomeActivityPresenter, Ho
 
     @Override
     public void onStop() {
-        // koristimo to u stop metodi kada zaustavimo da se provjera napravi
         homeInteractor.disposeComp();
     }
 
     @Override
     public void getNamePlayer() {
-        view.openListActivity(player);
+        view.openListActivityWithPlayer(player);
     }
 
     @Override
     public void getNameTeam() {
-        view.openSecondListActivity(team);
+        view.openListActivityWithTeams(team);
     }
 
     @Override

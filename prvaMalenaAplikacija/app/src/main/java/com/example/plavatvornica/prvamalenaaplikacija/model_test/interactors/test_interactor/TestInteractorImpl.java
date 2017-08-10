@@ -8,9 +8,6 @@ import com.example.plavatvornica.prvamalenaaplikacija.model_test.interactors.tes
 
 public class TestInteractorImpl implements TestInteractor {
 
-
     @Override
-    public void getData(TestListener listener) {
-
-    }
+    public void getData(TestListener listener) {}
 }

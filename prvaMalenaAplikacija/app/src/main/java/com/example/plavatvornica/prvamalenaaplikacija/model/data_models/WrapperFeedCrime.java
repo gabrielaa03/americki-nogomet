@@ -12,13 +12,12 @@ import io.realm.annotations.PrimaryKey;
 
 public class WrapperFeedCrime extends RealmObject {
 
-public FeedCrime feedCrime;
+private FeedCrime feedCrime;
+
+    public WrapperFeedCrime() {}
 
     public WrapperFeedCrime(FeedCrime feedCrime) {
         this.feedCrime = feedCrime;
-    }
-
-    public WrapperFeedCrime() {
     }
 
     public FeedCrime getFeed() {

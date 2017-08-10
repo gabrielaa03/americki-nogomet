@@ -1,7 +1,7 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.presenter;
+package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.presenter;
 
 
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.FragmentContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.FragmentContract;
 
 /**
  * Created by Plava tvornica on 24.7.2017..
@@ -9,7 +9,7 @@ import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.F
 
 public class FragmentPresenterImpl implements FragmentContract.FragmentPresenter {
 
-    String start_date, end_date;
+    private String start_date, end_date;
 
     public void findFragment(int position, final FragmentContract.FragmentView listener) {
 
@@ -35,8 +35,7 @@ public class FragmentPresenterImpl implements FragmentContract.FragmentPresenter
                 break;
         }
 
-        int pagePosition = position;
-        listener.sendDate(start_date, end_date, pagePosition);
+        listener.sendDate(start_date, end_date, position);
 
     }
 }

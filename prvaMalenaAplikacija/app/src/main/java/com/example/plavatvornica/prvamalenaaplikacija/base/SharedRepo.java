@@ -16,7 +16,7 @@ public class SharedRepo {
     private static final String TIME_ALL_PLAYERS = "lastTime4";
     private static final String TIME_HOME = "lastTime5";
 
-    MyApplication app;
+    private MyApplication app;
 
     public SharedRepo(MyApplication app) {
         this.app = app;

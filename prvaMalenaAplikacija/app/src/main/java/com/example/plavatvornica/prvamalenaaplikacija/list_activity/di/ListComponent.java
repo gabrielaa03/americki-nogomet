@@ -1,7 +1,7 @@
-package com.example.plavatvornica.prvamalenaaplikacija.second_activity.di;
+package com.example.plavatvornica.prvamalenaaplikacija.list_activity.di;
 
 import com.example.plavatvornica.prvamalenaaplikacija.base.scope.PerActivity;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.view.SecondActivity;
 
 import dagger.Subcomponent;
 

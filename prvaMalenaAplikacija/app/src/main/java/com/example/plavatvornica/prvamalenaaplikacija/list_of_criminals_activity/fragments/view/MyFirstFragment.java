@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.view;
+package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.ThirdActivityContract;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.adapter.RecyclerAdapterFragment;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.FragmentContract;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.fragments.presenter.FragmentPresenterImpl;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.ListOfCriminalsContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.adapter.RecyclerAdapterFragment;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.FragmentContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.presenter.FragmentPresenterImpl;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import butterknife.Unbinder;
  * Created by Plava tvornica on 20.7.2017..
  */
 
-public class FirstFragment extends Fragment implements FragmentContract.FragmentView {
+public class MyFirstFragment extends Fragment implements FragmentContract.FragmentView {
 
     private Unbinder unbinder;
     @BindView(R.id.recycler_view_fragment)
@@ -34,13 +34,12 @@ public class FirstFragment extends Fragment implements FragmentContract.Fragment
     RecyclerView.LayoutManager layoutManager;
     RecyclerAdapterFragment adapter;
     FragmentPresenterImpl presenter;
-    ThirdActivityContract.BetweenFragmentAndActivityInterface listener;
+    ListOfCriminalsContract.BetweenFragmentAndActivityInterface listener;
+    private int pos;
 
-    int pos;
 
-
-    public static FirstFragment newInstance(int position) {
-        FirstFragment fragmentFirst = new FirstFragment();
+    public static MyFirstFragment newInstance(int position) {
+        MyFirstFragment fragmentFirst = new MyFirstFragment();
         Bundle args = new Bundle();
         args.putSerializable("position", position);
         fragmentFirst.setArguments(args);
@@ -53,22 +52,16 @@ public class FirstFragment extends Fragment implements FragmentContract.Fragment
         pos = getArguments() != null ? getArguments().getInt("position") : 1;
     }
 
-    // Inflate the view for the fragment based on layout XML
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         unbinder = ButterKnife.bind(this, view);
-
         presenter = new FragmentPresenterImpl();
         presenter.findFragment(pos, this);
-
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-
         adapter = new RecyclerAdapterFragment();
         recyclerView.setAdapter(adapter);
-
         return view;
     }
 
@@ -81,7 +74,7 @@ public class FirstFragment extends Fragment implements FragmentContract.Fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        listener = (ThirdActivityContract.BetweenFragmentAndActivityInterface) context;
+        listener = (ListOfCriminalsContract.BetweenFragmentAndActivityInterface) context;
     }
 
     @Override
@@ -92,6 +85,4 @@ public class FirstFragment extends Fragment implements FragmentContract.Fragment
     public void addListToAdapter(List<Wrapper_Second> list) {
         adapter.addData(list);
     }
-
-
 }

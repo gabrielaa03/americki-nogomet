@@ -1,24 +1,18 @@
-package com.example.plavatvornica.prvamalenaaplikacija.second_activity.presenter;
+package com.example.plavatvornica.prvamalenaaplikacija.list_activity.presenter;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.plavatvornica.prvamalenaaplikacija.base.SharedRepo;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
-import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.SecondActivityContract;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.SecondActivityContract;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import dagger.Provides;
 
 /**
  * Created by Plava tvornica on 18.7.2017..

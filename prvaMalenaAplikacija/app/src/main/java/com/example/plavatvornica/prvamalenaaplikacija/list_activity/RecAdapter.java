@@ -1,4 +1,4 @@
-package com.example.plavatvornica.prvamalenaaplikacija.second_activity;
+package com.example.plavatvornica.prvamalenaaplikacija.list_activity;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +14,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper.TYPE_ELEMENT;
 import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper.TYPE_HEADER;
@@ -25,9 +24,9 @@ import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.W
 
 
 public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    ArrayList<Wrapper> recList = new ArrayList<>();
-    SecondActivityContract.SecondActivityView clickListener;
-    String text;
+    private ArrayList<Wrapper> recList = new ArrayList<>();
+    private SecondActivityContract.SecondActivityView clickListener;
+    private String text;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -104,5 +103,4 @@ public class RecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         recList.addAll(list);
         notifyDataSetChanged();
     }
-
 }

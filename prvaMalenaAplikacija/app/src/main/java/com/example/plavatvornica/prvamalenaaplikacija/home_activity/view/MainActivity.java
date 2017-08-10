@@ -10,9 +10,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.R;
 import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.HomeContract;
 import com.example.plavatvornica.prvamalenaaplikacija.home_activity.di.HomeModule;
-import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
-import com.example.plavatvornica.prvamalenaaplikacija.second_activity.view.SecondActivity;
-import com.example.plavatvornica.prvamalenaaplikacija.third_activity.view.ThirdActivity;
+import com.example.plavatvornica.prvamalenaaplikacija.list_activity.view.SecondActivity;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.view.ListOfCriminalsOverYear;
 import com.example.plavatvornica.prvamalenaaplikacija.time_activity.view.TimeActivity;
 
 import javax.inject.Inject;
@@ -20,7 +19,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements HomeContract.HomeActivityView {
     @BindView(R.id.tv_worst_crime_value)
@@ -53,24 +51,24 @@ public class MainActivity extends AppCompatActivity implements HomeContract.Home
     }
 
     @OnClick(R.id.btn_find)
-    public void openP(View view) {
+    public void openPresenter(View view) {
         presenter.onStart();
     }
 
     @OnClick(R.id.bCrime)
-    public void openActivity(View view) {
+    public void findTeamName(View view) {
         presenter.getNameTeam();
     }
 
     @OnClick(R.id.bPlayer)
-    public void openActivity1(View view) {
+    public void findPlayerName(View view) {
         presenter.getNamePlayer();
     }
 
 
     @OnClick(R.id.btn_third_act)
-    public void openActivity2(View view) {
-        Intent intent = new Intent(this, ThirdActivity.class);
+    public void openViewPagerActivity(View view) {
+        Intent intent = new Intent(this, ListOfCriminalsOverYear.class);
         startActivity(intent);
     }
 
@@ -90,21 +88,20 @@ public class MainActivity extends AppCompatActivity implements HomeContract.Home
         tvTeam.setText(team);
     }
 
-    //imolemenatcija funkcije u interface-u
     @Override
     public void setupWorstCrime(String crime) {
         tvCrime.setText(crime);
     }
 
     @Override
-    public void openListActivity(String player) {
+    public void openListActivityWithPlayer(String player) {
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra(SecondActivity.EXTRA_PLAYER_NAME, player);
         startActivity(intent);
     }
 
     @Override
-    public void openSecondListActivity(String team) {
+    public void openListActivityWithTeams(String team) {
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra(SecondActivity.EXTRA_TEAM_NAME, team);
         startActivity(intent);

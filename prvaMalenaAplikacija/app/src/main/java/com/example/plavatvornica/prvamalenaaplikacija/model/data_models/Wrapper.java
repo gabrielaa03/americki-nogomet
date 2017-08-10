@@ -12,8 +12,8 @@ public class Wrapper {
 
     public static final int TYPE_HEADER = R.layout.recycler_cell_layout_header;
     public static final int TYPE_ELEMENT = R.layout.recycler_cell_layout;
-    String text;
-    int type;
+    private String text;
+    private int type;
 
     public Wrapper(String text, int type) {
         this.text = text;
