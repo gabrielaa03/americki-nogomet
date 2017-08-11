@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.ListOfCriminalsContract;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import static com.example.plavatvornica.prvamalenaaplikacija.model.data_models.W
  * Created by Plava tvornica on 21.7.2017..
  */
 
-public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private ArrayList<Wrapper_Second> list = new ArrayList<>();
 
     @Override
@@ -54,9 +55,7 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        {
             return (list == null) ? 0 : list.size();
-        }
     }
 
     public class PlayerHolder extends RecyclerView.ViewHolder {
@@ -91,6 +90,4 @@ public class RecyclerAdapterFragment extends RecyclerView.Adapter<RecyclerView.V
         list.addAll(list1);
         notifyDataSetChanged();
     }
-
-
 }

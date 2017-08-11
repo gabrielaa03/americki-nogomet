@@ -11,5 +11,6 @@ public interface FragmentContract {
     }
 
     interface FragmentPresenter {
+        void findFragment(int position, final FragmentContract.FragmentView listener);
     }
 }

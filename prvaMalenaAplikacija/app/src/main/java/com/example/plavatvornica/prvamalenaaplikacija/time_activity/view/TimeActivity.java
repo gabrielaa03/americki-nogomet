@@ -32,7 +32,6 @@ public class TimeActivity extends AppCompatActivity implements TimeContract.Time
         MyApplication.appComponent.plus(new TimeModule(this)).inject(this);
         presenter = new TimePresenterImpl(this);
         ButterKnife.bind(this);
-
     }
 
     @Override

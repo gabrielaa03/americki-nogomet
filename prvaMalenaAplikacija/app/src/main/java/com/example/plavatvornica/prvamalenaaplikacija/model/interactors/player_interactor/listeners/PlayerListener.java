@@ -1,5 +1,6 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.listeners;
 
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrimesOverYear;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public interface PlayerListener {
 
-    void onSuccess1(String start, String end, final int pagePosition, List<FeedPlayer> list);
+    void onSuccess1(String start, String end, final int pagePosition, List<FeedCrimesOverYear> list);
 
     void onSuccess2(List<FeedPlayer> list);
 

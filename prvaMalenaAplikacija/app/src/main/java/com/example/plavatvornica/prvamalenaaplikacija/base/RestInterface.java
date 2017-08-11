@@ -1,7 +1,9 @@
 package com.example.plavatvornica.prvamalenaaplikacija.base;
 
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrimesOverYear;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayerCrimes;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
 
 import java.util.List;
@@ -29,10 +31,10 @@ public interface RestInterface {
     Observable<List<FeedCrime>> getCrime();
 
     @GET("player/topCrimes/{name}")
-    Observable<List<FeedCrime>> listOfCrimes(@Path("name") String name);
+    Observable<List<FeedPlayerCrimes>> listOfCrimes(@Path("name") String name);
 
     @GET("player")
-    Observable<List<FeedPlayer>> listOfCrimesOverYear(@Query("start_date") String start_date, @Query("end_date") String end_date);
+    Observable<List<FeedCrimesOverYear>> listOfCrimesOverYear(@Query("start_date") String start_date, @Query("end_date") String end_date);
 
 
 }

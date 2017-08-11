@@ -1,5 +1,6 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor;
 
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrimesOverYear;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.listeners.PlayerListener;
@@ -17,7 +18,7 @@ public interface PlayerInteractor extends BaseInteractor {
 
     void getCrimesOverYear(String start, String end, final int pagePosition, PlayerListener listener);
 
-    Observable<List<FeedPlayer>> getCrimesOverYearObservable(String start, String end);
+    Observable<List<FeedCrimesOverYear>> getCrimesOverYearObservable(String start, String end);
 
     Observable<List<FeedPlayer>> getAllPlayersObservable();
 

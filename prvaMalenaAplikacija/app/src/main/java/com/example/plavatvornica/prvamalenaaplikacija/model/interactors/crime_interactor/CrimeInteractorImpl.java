@@ -3,9 +3,7 @@ package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_i
 import com.example.plavatvornica.prvamalenaaplikacija.base.RestInterface;
 import com.example.plavatvornica.prvamalenaaplikacija.base.SharedRepo;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
-import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
-import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
-import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.WrapperFeedCrime;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayerCrimes;
 import com.example.plavatvornica.prvamalenaaplikacija.model.database.DatabaseHandle;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.BaseInteractorImpl;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
@@ -45,7 +43,7 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
         long myTime = currentTime - readTime;
 
         if (myTime < 300000) {
-            listener.onSuccess(DatabaseHandle.getFeedCrime(),1);
+            listener.onSuccess(DatabaseHandle.getFeedCrime());
         } else {
             addObserver(getAllCrimesObservable().subscribeOn(Schedulers.io()).flatMap(new Function<List<FeedCrime>, ObservableSource<List<FeedCrime>>>() {
                 @Override
@@ -58,7 +56,7 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
                     .subscribeWith(new DisposableObserver<List<FeedCrime>>() {
                         @Override
                         public void onNext(List<FeedCrime> feedCrimes) {
-                            listener.onSuccess(feedCrimes, 1);
+                            listener.onSuccess(feedCrimes);
                         }
 
                         @Override
@@ -80,24 +78,20 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
         long myTime = currentTime - readTime;
 
         if (myTime < 300000) {
-            listener.onSuccess(DatabaseHandle.getFeedPlayersCrimes(), 2);
+            listener.onSuccess1(DatabaseHandle.getFeedPlayersCrimes());
         } else {
-            addObserver(getPlayersCrimesObservable(playerName).subscribeOn(Schedulers.io()).flatMap(new Function<List<FeedCrime>, ObservableSource<List<FeedCrime>>>() {
+            addObserver(getPlayersCrimesObservable(playerName).subscribeOn(Schedulers.io()).flatMap(new Function<List<FeedPlayerCrimes>, ObservableSource<List<FeedPlayerCrimes>>>() {
                 @Override
-                public ObservableSource<List<FeedCrime>> apply(@NonNull List<FeedCrime> feedCrimes) throws Exception {
-                    List<WrapperFeedCrime> list = new ArrayList<>();
-                    for(FeedCrime feedCrime : feedCrimes){
-                        list.add(new WrapperFeedCrime(feedCrime));
-                    }
-                    DatabaseHandle.saveFeedPlayersCrimes(list);
+                public ObservableSource<List<FeedPlayerCrimes>> apply(@NonNull List<FeedPlayerCrimes> feedCrimes) throws Exception {
+                    DatabaseHandle.saveFeedPlayersCrimes(feedCrimes);
                     repo.setSavedTimePlayersCrimes(System.currentTimeMillis());
                     return Observable.just(feedCrimes);
                 }
             }).observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableObserver<List<FeedCrime>>() {
+                    .subscribeWith(new DisposableObserver<List<FeedPlayerCrimes>>() {
                         @Override
-                        public void onNext(List<FeedCrime> feedCrimes) {
-                            listener.onSuccess(feedCrimes, 2); }
+                        public void onNext(List<FeedPlayerCrimes> feedCrimes) {
+                            listener.onSuccess1(feedCrimes); }
 
                         @Override
                         public void onError(Throwable e) {
@@ -111,7 +105,7 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
                     }));
         }
     }
-    public Observable<List<FeedCrime>> getPlayersCrimesObservable(String playerName) {
+    public Observable<List<FeedPlayerCrimes>> getPlayersCrimesObservable(String playerName) {
         return restInterface.listOfCrimes(playerName);
     }
     public Observable<List<FeedCrime>> getAllCrimesObservable() {

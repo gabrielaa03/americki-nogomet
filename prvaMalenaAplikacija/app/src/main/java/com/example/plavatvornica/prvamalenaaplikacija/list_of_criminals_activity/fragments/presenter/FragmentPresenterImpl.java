@@ -3,17 +3,24 @@ package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activit
 
 import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.FragmentContract;
 
+import javax.inject.Inject;
+
 /**
  * Created by Plava tvornica on 24.7.2017..
  */
 
 public class FragmentPresenterImpl implements FragmentContract.FragmentPresenter {
-
+    FragmentContract.FragmentView view;
     private String start_date, end_date;
 
-    public void findFragment(int position, final FragmentContract.FragmentView listener) {
+    @Inject
+    public FragmentPresenterImpl(FragmentContract.FragmentView view) {
+        this.view = view;
+    }
+    @Override
+    public void findFragment(int pos, final FragmentContract.FragmentView listener) {
 
-        switch (position) {
+        switch (pos) {
 
             case 0:
                 start_date = "2010-01-01";
@@ -35,7 +42,7 @@ public class FragmentPresenterImpl implements FragmentContract.FragmentPresenter
                 break;
         }
 
-        listener.sendDate(start_date, end_date, position);
+        listener.sendDate(start_date, end_date, pos);
 
     }
 }

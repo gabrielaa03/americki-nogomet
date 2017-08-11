@@ -1,6 +1,7 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners;
 
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayerCrimes;
 
 import java.util.List;
 
@@ -9,7 +10,8 @@ import java.util.List;
  */
 
 public interface CrimeListener {
-    void onSuccess(List<FeedCrime> list, int type);
+    void onSuccess(List<FeedCrime> list);
+    void onSuccess1(List<FeedPlayerCrimes> list);
 
     void onError();
 }

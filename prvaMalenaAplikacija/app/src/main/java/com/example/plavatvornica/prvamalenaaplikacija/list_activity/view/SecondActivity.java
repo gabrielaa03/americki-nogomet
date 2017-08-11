@@ -32,7 +32,7 @@ public class SecondActivity extends AppCompatActivity implements SecondActivityC
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.tv_name)
-    private TextView tvName;
+    TextView tvName;
     private String teamName, playerName;
 
     @Inject

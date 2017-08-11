@@ -27,4 +27,5 @@ public interface ListOfCriminalsContract {
 
         void sendDataToActivity(String start_date, String end_date, int pagePosition);
     }
+
 }

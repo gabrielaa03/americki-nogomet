@@ -1,16 +1,15 @@
 package com.example.plavatvornica.prvamalenaaplikacija.model.database;
 
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrimesOverYear;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayerCrimes;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedTeam;
-import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.WrapperCrimesOverYeaer;
-import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.WrapperFeedCrime;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -49,7 +48,7 @@ public class DatabaseHandle {
         });
     }
 
-    public static void saveFeedCrimesOverYear(final List<WrapperCrimesOverYeaer> listPlayer) {
+    public static void saveFeedCrimesOverYear(final List<FeedCrimesOverYear> listPlayer) {
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -59,7 +58,7 @@ public class DatabaseHandle {
         });
     }
 
-    public static void saveFeedPlayersCrimes(final List<WrapperFeedCrime> listPlayer1) {
+    public static void saveFeedPlayersCrimes(final List<FeedPlayerCrimes> listPlayer1) {
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -84,23 +83,13 @@ public class DatabaseHandle {
         return realm.copyFromRealm(realm.where(FeedTeam.class).findAll());
     }
 
-    public static List<FeedCrime> getFeedPlayersCrimes() {
+    public static List<FeedPlayerCrimes> getFeedPlayersCrimes() {
         Realm realm = Realm.getDefaultInstance();
-        List<FeedCrime> list = new ArrayList<>();
-        RealmResults<WrapperFeedCrime> wrapperFeedCrimes = realm.where(WrapperFeedCrime.class).findAll();
-        for(WrapperFeedCrime wrapperFeedCrime : wrapperFeedCrimes){
-            list.add(wrapperFeedCrime.getFeed());
-        }
-         return list;
+         return realm.copyFromRealm(realm.where(FeedPlayerCrimes.class).findAll());
     }
 
-    public static List<FeedPlayer> getFeedCrimesOverYear() {
+    public static List<FeedCrimesOverYear> getFeedCrimesOverYear(int id) {
         Realm realm = Realm.getDefaultInstance();
-        List<FeedPlayer> list = new ArrayList<>();
-        RealmResults<WrapperCrimesOverYeaer> wrapperCrimesOverYeaers = realm.where(WrapperCrimesOverYeaer.class).findAll();
-        for(WrapperCrimesOverYeaer wrapperCrimesOverYeaer : wrapperCrimesOverYeaers){
-            list.add(wrapperCrimesOverYeaer.getFeedPlayer());
-        }
-        return list;
+        return realm.copyFromRealm(realm.where(FeedCrimesOverYear.class).equalTo("pos", id).findAll());
     }
 }

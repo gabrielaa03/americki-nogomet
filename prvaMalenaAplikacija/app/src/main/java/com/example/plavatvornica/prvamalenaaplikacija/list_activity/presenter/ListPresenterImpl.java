@@ -3,6 +3,7 @@ package com.example.plavatvornica.prvamalenaaplikacija.list_activity.presenter;
 import android.util.Log;
 
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrime;
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayerCrimes;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.CrimeInteractor;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.crime_interactor.listeners.CrimeListener;
@@ -32,8 +33,8 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
     }
 
     @Override
-    public void onSuccess(List<FeedCrime> list, int type) {
-        if (type == 1) {
+    public void onSuccess(List<FeedCrime> list) {
+
             List<String> listOfAllCrimes = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
                 listOfAllCrimes.add(list.get(i).getCategory());
@@ -60,13 +61,15 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
                 }
             }
             view.sendSortedCrimes(list1);
-        } else{
-            listOfCrimes = new ArrayList<>();
-            for (int i = 0; i < list.size(); i++) {
-                listOfCrimes.add(new Wrapper(list.get(i).getCategory1(), Wrapper.TYPE_ELEMENT));
-            }
-            view.sendPlayersCrimes(listOfCrimes);
         }
+
+    @Override
+    public void onSuccess1(List<FeedPlayerCrimes> list) {
+        listOfCrimes = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            listOfCrimes.add(new Wrapper(list.get(i).getCategory1(), Wrapper.TYPE_ELEMENT));
+        }
+        view.sendPlayersCrimes(listOfCrimes);
     }
 
     @Override
@@ -75,8 +78,7 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
     }
 
     @Override
-    public void onStart() {
-    }
+    public void onStart() {}
 
     @Override
     public void onStop() {
@@ -94,5 +96,4 @@ public class ListPresenterImpl implements SecondActivityContract.ListPresenter, 
                 interactor.getAllCrimes(this);
         }
     }
-
 }

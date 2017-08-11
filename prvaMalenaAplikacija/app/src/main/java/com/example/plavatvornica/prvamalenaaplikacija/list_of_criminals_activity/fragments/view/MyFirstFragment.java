@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.plavatvornica.prvamalenaaplikacija.R;
+import com.example.plavatvornica.prvamalenaaplikacija.base.MyApplication;
+import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.di.FragmentModule;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.ListOfCriminalsContract;
 import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.adapter.RecyclerAdapterFragment;
@@ -17,6 +19,8 @@ import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity
 import com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activity.fragments.presenter.FragmentPresenterImpl;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,14 +33,13 @@ import butterknife.Unbinder;
 public class MyFirstFragment extends Fragment implements FragmentContract.FragmentView {
 
     private Unbinder unbinder;
-    @BindView(R.id.recycler_view_fragment)
-    RecyclerView recyclerView;
+    @BindView(R.id.recycler_view_fragment) RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    RecyclerAdapterFragment adapter;
-    FragmentPresenterImpl presenter;
+    @Inject RecyclerAdapterFragment adapter;
+    @Inject FragmentContract.FragmentPresenter presenter;
+
     ListOfCriminalsContract.BetweenFragmentAndActivityInterface listener;
     private int pos;
-
 
     public static MyFirstFragment newInstance(int position) {
         MyFirstFragment fragmentFirst = new MyFirstFragment();
@@ -49,6 +52,7 @@ public class MyFirstFragment extends Fragment implements FragmentContract.Fragme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.appComponent.plus(new FragmentModule(this)).inject(this);
         pos = getArguments() != null ? getArguments().getInt("position") : 1;
     }
 
@@ -56,13 +60,19 @@ public class MyFirstFragment extends Fragment implements FragmentContract.Fragme
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         unbinder = ButterKnife.bind(this, view);
-        presenter = new FragmentPresenterImpl();
-        presenter.findFragment(pos, this);
         layoutManager = new LinearLayoutManager(getContext());
+
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerAdapterFragment();
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.findFragment(pos, this);
+
     }
 
     @Override

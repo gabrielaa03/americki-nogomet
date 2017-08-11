@@ -2,6 +2,7 @@ package com.example.plavatvornica.prvamalenaaplikacija.list_of_criminals_activit
 
 import android.util.Log;
 
+import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedCrimesOverYear;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.FeedPlayer;
 import com.example.plavatvornica.prvamalenaaplikacija.model.data_models.Wrapper_Second;
 import com.example.plavatvornica.prvamalenaaplikacija.model.interactors.player_interactor.PlayerInteractor;
@@ -30,7 +31,7 @@ public class ListOfCriminalsOverYearImpl implements ListOfCriminalsContract.Thir
     }
 
     @Override
-    public void onSuccess1(String start, String end, int pagePosition, List<FeedPlayer> list) {
+    public void onSuccess1(String start, String end, int pagePosition, List<FeedCrimesOverYear> list) {
         List<Wrapper_Second> lCrimeOverYear = new ArrayList<>();
         assert list != null;
         for (int i = 0; i < list.size(); i++) {
